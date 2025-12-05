@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="header">
+    <mat-icon class="icon">style</mat-icon>
+    <h2>Jogo 21</h2>
+  </div>
+
+  <mat-card class="card">
+    <button *ngIf="acessar == false && cadastrar == false" class="btn-acessar" (click)="onClickAcessar()">Acessar</button>
+
+    <button
+      *ngIf="acessar == false && cadastrar == false"
+      (click)="onClickCadastrar()"
+      class="register-link"
+      class="btn-cadastrar"
+    >
+      Cadastrar
+    </button>
+
+    <div class="divi-form" *ngIf="acessar">
+      <form (ngSubmit)="onSubmit()" class="login">
+        <mat-form-field appearance="fill" class="divi-form">
+          <mat-label>Email</mat-label>
+          <input style="height: 50px" matInput [(ngModel)]="email" name="email" />
+        </mat-form-field>
+        <div class="btns">
+          <button (click)="onClickVoltar()" class="btn-voltar">voltar</button>
+          <!-- <button class="btn-jogar">jogar <mat-icon>chevron_right</mat-icon></button> -->
+
+          <button class="btn-jogar" (click)="navegarParaDashboard()">
+            <span></span>
+            <span>jogar</span>
+            <mat-icon class="seta">chevron_right</mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="divi-form" *ngIf="cadastrar">
+      <form (ngSubmit)="onSubmit()" class="login">
+        <mat-form-field appearance="fill" class="divi-form">
+          <mat-label>Email</mat-label>
+          <input style="height: 50px" matInput [(ngModel)]="email" name="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="divi-form">
+          <mat-label>Nome</mat-label>
+          <input style="height: 50px" matInput [(ngModel)]="nome" name="email" />
+        </mat-form-field>
+        <div class="btns">
+          <button (click)="onClickVoltar()" class="btn-voltar">voltar</button>
+
+          <button type="button" class="btn-salvar" >
+            <span></span>
+            <span>Cadastrar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

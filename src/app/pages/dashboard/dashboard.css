@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 47px;
+}
+.sub-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 47px;
+  margin-right: 47px;
+  border: 1px solid #999999;
+  border-radius: 10px;
+  background-color: white;
+  padding-right: 60px;
+  padding-left: 60px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+
+}
+
+.icon {
+  font-size: 50px;
+  width: 60px;
+  height: 48px;
+}

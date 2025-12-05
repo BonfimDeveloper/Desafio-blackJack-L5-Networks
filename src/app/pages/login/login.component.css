@@ -1,0 +1,153 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.header {
+  font: Poppins;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 36px;
+  gap: 8px;
+  margin-bottom: 30px;
+  margin-top: 174px;
+}
+
+.icon {
+  font-size: 50px;
+  width: 60px;
+  height: 48px;
+}
+
+.card {
+  width: 620px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  border: 1px;
+  border-radius: 10px;
+  padding: 30px;
+  background-color: white;
+}
+
+.btn-acessar {
+  width: 344px;
+  height: 100px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  background-color: #3963f7;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-acessar:hover {
+  background-color: #2f5af8;
+}
+
+
+
+.btn-cadastrar {
+  font-size: 14px;
+  flex-direction: row;
+font-size: 18px;
+  margin-left: 250px;
+  margin-top: 10px;
+  border: none;
+  color: #3963f7;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.btn-cadastrar:hover {
+  cursor: pointer;
+  color: #2f5af8;
+  transform: scale(1.1); /* aumenta 10% */
+
+}
+
+.login {
+  width: 540px;
+
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.divi-form{
+  width: 540px;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.btn-jogar {
+  display: flex;
+  width: 149px;
+  height: 40px;
+  font-size: 14px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  border: none;
+  background-color: #3963f7;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-salvar{
+display: flex;
+  width: 296px;
+  height: 70px;
+  font-size: 16px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: none;
+  background-color: #3963f7;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-salvar:hover{
+  background-color: #2f5af8;
+}
+
+
+
+.btn-jogar:hover {
+  background-color: #2f5af8;
+}
+
+.btn-voltar {
+  font-size: 14px;
+  flex-direction: row;
+
+  border: none;
+  color: #3963f7;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.btn-voltar:hover {
+  transform: scale(1.1); /* aumenta 10% */
+}
+
+
+
