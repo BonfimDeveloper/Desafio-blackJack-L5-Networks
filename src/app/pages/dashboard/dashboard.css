@@ -45,6 +45,7 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
+
 }
 .btn-start-game {
   display: flex;
@@ -58,6 +59,12 @@
   border-radius: 6px;
   margin-top: 200px;
   font-size: 32px;
+  gap:40px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+.btn-start-game:hover{
+   transform: scale(1.1);
 }
 
 .history-view{
@@ -74,6 +81,7 @@
       justify-content: center;
       align-items: center;
       padding-top: 100px;
+      font-size: 18px;
       gap: 4px;
       width: 355px;
       height: 90px;
@@ -82,5 +90,12 @@
       padding: 10px;
       background-color: white;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+
+}
+
+.history-view-child:hover{
+   transform: scale(1.1);
 
 }
