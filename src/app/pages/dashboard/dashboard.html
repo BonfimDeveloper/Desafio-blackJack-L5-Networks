@@ -7,7 +7,7 @@
     </div>
     <div class="div-itens" >
       <span>Partidas</span>
-      <span>{{ auth.user()?.stats?.games }}</span>
+      <span>{{ auth.user()?.stats?.wins }}</span>
     </div>
   </div>
   <div class="divs-sub" >
@@ -30,7 +30,7 @@
   </div>
 </div>
 <div class="div-btn-start-game">
-  <div class="btn-start-game">
+  <button class="btn-start-game" (click)="navegarParaJogo()">
     <span> Iniciar Nova Partida </span>
     <svg width="60" height="60" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
       <!-- Carta esquerda -->
@@ -76,7 +76,7 @@
         ♠
       </text>
     </svg>
-  </div>
+  </button>
 </div>
 
 <div class="history-view"

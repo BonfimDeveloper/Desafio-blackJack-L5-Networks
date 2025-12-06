@@ -44,7 +44,7 @@ export class Dashboard {
     this.loader.show();
 
     setTimeout(() => {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/game']);
       this.loader.hide();
     }, 1000);
   }

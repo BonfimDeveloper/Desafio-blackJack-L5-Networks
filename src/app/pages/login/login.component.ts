@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -57,7 +57,8 @@ export class LoginComponent {
     private auth: AuthService,
     private router: Router,
     private toast: ToastService,
-    private loader: LoaderService
+    private loader: LoaderService,
+    private cd: ChangeDetectorRef
   ) {}
 
   public logarUsuario(): void {
@@ -96,8 +97,10 @@ export class LoginComponent {
       console.log('Usuário cadastrado com sucesso!');
       this.toast.success('Usuário cadastrado!');
       setTimeout(() => {
-        this.router.navigate(['/dashboard']);
+        this.acessar = true;
+        this.cadastrar = false;
         this.loader.hide();
+        this.cd.detectChanges();
       }, 2000);
     } catch (err: any) {
       console.error(err.message);
