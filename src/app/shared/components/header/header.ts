@@ -13,5 +13,16 @@ import { LoaderService } from '../../../core/services/loader.service';
   styleUrl: './header.css',
 })
 export class HeaderComponent {
-  constructor(private auth: AuthService, private router: Router, private loader: LoaderService) {}
+  constructor(public auth: AuthService, private router: Router, private loader: LoaderService) {}
+
+  //Desloga usuário
+  public sairDoJogo(): void {
+    this.loader.show();
+
+    setTimeout(() => {
+      this.auth.logout();
+      this.router.navigate(['/login']);
+      this.loader.hide();
+    }, 1000);
+  }
 }

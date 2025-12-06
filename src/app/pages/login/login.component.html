@@ -5,7 +5,13 @@
   </div>
 
   <mat-card class="card">
-    <button *ngIf="acessar == false && cadastrar == false" class="btn-acessar" (click)="onClickAcessar()">Acessar</button>
+    <button
+      *ngIf="acessar == false && cadastrar == false"
+      class="btn-acessar"
+      (click)="onClickAcessar()"
+    >
+      Acessar
+    </button>
 
     <button
       *ngIf="acessar == false && cadastrar == false"
@@ -17,16 +23,22 @@
     </button>
 
     <div class="divi-form" *ngIf="acessar">
-      <form (ngSubmit)="onSubmit()" class="login">
+      <form [formGroup]="loginForm" (ngSubmit)="logarUsuario()" class="login">
         <mat-form-field appearance="fill" class="divi-form">
           <mat-label>Email</mat-label>
-          <input style="height: 50px" matInput [(ngModel)]="email" name="email" />
+          <input matInput formControlName="email" style="height: 50px" />
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            O email é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+            Email inválido.
+          </mat-error>
         </mat-form-field>
         <div class="btns">
           <button (click)="onClickVoltar()" class="btn-voltar">voltar</button>
           <!-- <button class="btn-jogar">jogar <mat-icon>chevron_right</mat-icon></button> -->
 
-          <button class="btn-jogar" (click)="navegarParaDashboard()">
+          <button class="btn-jogar" >
             <span></span>
             <span>jogar</span>
             <mat-icon class="seta">chevron_right</mat-icon>
@@ -36,41 +48,38 @@
     </div>
 
     <div class="divi-form" *ngIf="cadastrar">
-      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="login">
+      <form [formGroup]="cadastroForm" (ngSubmit)="cadastrarUsuario()" class="login">
+        <mat-form-field appearance="fill" class="divi-form">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" style="height: 50px" />
+          <mat-error *ngIf="cadastroForm.get('email')?.hasError('required')">
+            O email é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="cadastroForm.get('email')?.hasError('email')">
+            Email inválido.
+          </mat-error>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill" class="divi-form">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" style="height: 50px">
-    <mat-error *ngIf="cadastroForm.get('email')?.hasError('required')">
-      O email é obrigatório.
-    </mat-error>
-    <mat-error *ngIf="cadastroForm.get('email')?.hasError('email')">
-      Email inválido.
-    </mat-error>
-  </mat-form-field>
+        <mat-form-field appearance="fill" class="divi-form">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" style="height: 50px" />
+          <mat-error *ngIf="cadastroForm.get('nome')?.hasError('required')">
+            O nome é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
+            O nome deve ter pelo menos 3 caracteres.
+          </mat-error>
+        </mat-form-field>
 
-  <mat-form-field appearance="fill" class="divi-form">
-    <mat-label>Nome</mat-label>
-    <input matInput formControlName="nome" style="height: 50px">
-    <mat-error *ngIf="cadastroForm.get('nome')?.hasError('required')">
-      O nome é obrigatório.
-    </mat-error>
-    <mat-error *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
-      O nome deve ter pelo menos 3 caracteres.
-    </mat-error>
-  </mat-form-field>
+        <div class="btns">
+          <button type="button" (click)="onClickVoltar()" class="btn-voltar">Voltar</button>
 
-  <div class="btns">
-    <button type="button" (click)="onClickVoltar()" class="btn-voltar">Voltar</button>
-
-    <button type="submit" class="btn-salvar">
-      <span></span>
-      <span>Cadastrar</span>
-    </button>
-  </div>
-
-</form>
-
+          <button type="submit" class="btn-salvar">
+            <span></span>
+            <span>Cadastrar</span>
+          </button>
+        </div>
+      </form>
     </div>
   </mat-card>
 </div>

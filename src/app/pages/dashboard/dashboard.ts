@@ -26,7 +26,7 @@ import { LoaderService } from '../../core/services/loader.service';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  constructor(private auth: AuthService, private router: Router, private loader: LoaderService) {}
+  constructor(public auth: AuthService, private router: Router, private loader: LoaderService) {}
 
   //Navega para página de visualização do histórico das partidas
   public visualizarHistorico(): void {

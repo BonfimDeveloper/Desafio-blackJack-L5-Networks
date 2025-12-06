@@ -23,6 +23,8 @@
 .btn-logout{
 background-color: transparent;
 border: none;
+cursor: pointer;
+
 }
 
 
@@ -44,6 +46,8 @@ border: none;
   .btn-logout{
 background-color: transparent;
 border: none;
+cursor: pointer;
+
 }
 }
 
@@ -73,6 +77,7 @@ border: none;
  .btn-logout{
 background-color: transparent;
 border: none;
+cursor: pointer;
 }
 
 .icon {

@@ -5,27 +5,27 @@
     <div>
       <mat-icon class="icon">sports_esports</mat-icon>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 4px">
+    <div class="div-itens" >
       <span>Partidas</span>
-      <span>1</span>
+      <span>{{ auth.user()?.stats?.games }}</span>
     </div>
   </div>
   <div class="divs-sub" >
     <div>
       <mat-icon class="icon">mood</mat-icon>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 4px">
+    <div class="div-itens">
       <span>Vitórias</span>
-      <span>variável</span>
+      <span>{{ auth.user()?.stats?.wins }}</span>
     </div>
   </div>
   <div class="divs-sub" >
     <div>
       <mat-icon class="icon">sentiment_very_dissatisfied</mat-icon>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 4px">
+    <div class="div-itens">
       <span>Derrotas</span>
-      <span>variável</span>
+      <span>{{ auth.user()?.stats?.losses }}</span>
     </div>
   </div>
 </div>

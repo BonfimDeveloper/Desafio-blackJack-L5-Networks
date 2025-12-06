@@ -39,6 +39,10 @@ import { LoaderService } from '../../core/services/loader.service';
   ],
 })
 export class LoginComponent {
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+  });
+
   cadastroForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -56,7 +60,28 @@ export class LoginComponent {
     private loader: LoaderService
   ) {}
 
-  onSubmit() {
+  public logarUsuario(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const email = this.loginForm.value.email!;
+
+    this.loader.show();
+
+    try {
+      this.auth.login(email);
+      this.toast.success('Login realizado com sucesso!');
+      this.router.navigate(['/dashboard']);
+    } catch (err: any) {
+      this.toast.error(err.message || 'Erro ao fazer login');
+    } finally {
+      this.loader.hide();
+    }
+  }
+
+  public cadastrarUsuario(): void {
     this.loader.show();
     if (this.cadastroForm.invalid) {
       this.cadastroForm.markAllAsTouched();
