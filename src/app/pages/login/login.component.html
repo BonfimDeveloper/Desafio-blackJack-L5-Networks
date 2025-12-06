@@ -36,25 +36,41 @@
     </div>
 
     <div class="divi-form" *ngIf="cadastrar">
-      <form (ngSubmit)="onSubmit()" class="login">
-        <mat-form-field appearance="fill" class="divi-form">
-          <mat-label>Email</mat-label>
-          <input style="height: 50px" matInput [(ngModel)]="email" name="email" />
-        </mat-form-field>
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="login">
 
-        <mat-form-field appearance="fill" class="divi-form">
-          <mat-label>Nome</mat-label>
-          <input style="height: 50px" matInput [(ngModel)]="nome" name="email" />
-        </mat-form-field>
-        <div class="btns">
-          <button (click)="onClickVoltar()" class="btn-voltar">voltar</button>
+  <mat-form-field appearance="fill" class="divi-form">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" style="height: 50px">
+    <mat-error *ngIf="cadastroForm.get('email')?.hasError('required')">
+      O email é obrigatório.
+    </mat-error>
+    <mat-error *ngIf="cadastroForm.get('email')?.hasError('email')">
+      Email inválido.
+    </mat-error>
+  </mat-form-field>
 
-          <button type="button" class="btn-salvar" >
-            <span></span>
-            <span>Cadastrar</span>
-          </button>
-        </div>
-      </form>
+  <mat-form-field appearance="fill" class="divi-form">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome" style="height: 50px">
+    <mat-error *ngIf="cadastroForm.get('nome')?.hasError('required')">
+      O nome é obrigatório.
+    </mat-error>
+    <mat-error *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
+      O nome deve ter pelo menos 3 caracteres.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="btns">
+    <button type="button" (click)="onClickVoltar()" class="btn-voltar">Voltar</button>
+
+    <button type="submit" class="btn-salvar">
+      <span></span>
+      <span>Cadastrar</span>
+    </button>
+  </div>
+
+</form>
+
     </div>
   </mat-card>
 </div>
