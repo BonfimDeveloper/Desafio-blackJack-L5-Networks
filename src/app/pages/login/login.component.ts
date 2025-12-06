@@ -76,6 +76,8 @@ export class LoginComponent {
       }, 2000);
     } catch (err: any) {
       console.error(err.message);
+      this.loader.hide();
+
       // exibir erro no template
     }
   }
