@@ -1,0 +1,26 @@
+<div class="deck-container" [style.width.px]="cardWidth" [style.height.px]="cardHeight">
+<!-- Stack of cards (visual) -->
+<div class="deck-stack" (click)="draw()" [class.disabled]="!clickable">
+<ng-container *ngFor="let n of visualStack; let i = index">
+<div
+class="card back"
+[style.transform]="computeStackTransform(i)"
+[style.zIndex]="100 - i"
+[attr.aria-hidden]="true"
+>
+<!-- back design (SVG with L5) -->
+<svg [attr.width]="cardWidth" [attr.height]="cardHeight" viewBox="0 0 88 106" preserveAspectRatio="xMidYMid meet">
+<rect x="0" y="0" width="88" height="106" rx="6" ry="6" fill="#0b4b76" stroke="#06354f" stroke-width="0.8" />
+<g transform="translate(44,53)" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">
+<circle r="20" fill="#ffffff22"></circle>
+<text y="6" font-size="20" fill="#ffffff">L5</text>
+</g>
+</svg>
+</div>
+</ng-container>
+</div>
+
+
+<!-- Optional: show deck count -->
+<div class="deck-count">{{ cards.length }}</div>
+</div>

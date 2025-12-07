@@ -1,0 +1,13 @@
+<!-- <div class="card-wrapper" [class.flip]="faceUp">
+  <div class="card-face front">
+    {{ card.rank }}
+    {{ card.suit }}
+  </div>
+</div> -->
+
+<div class="card" [ngClass]="size">
+  <div class="rank" [ngClass]="colorClass">{{ card.rank }}</div>
+  <div class="suit" [ngClass]="colorClass">
+    {{ suitSymbol }}
+  </div>
+</div>
