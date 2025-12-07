@@ -35,8 +35,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 12px;
-  padding: 6px 4px;
 }
 
 /* agrupamento topo-esquerdo */
@@ -130,6 +128,8 @@
   font-size: 1.1rem;
   font-weight: 700;
   color: #9e9e9e;
+  color: transparent;
+    -webkit-text-stroke: 2px #999999; /* borda da letra */
 
   text-align: center;
   width: 100%;
@@ -154,8 +154,6 @@
   margin-top: 8px;
   transition: transform 0.2s ease;
 }
-
-
 
 .count-indicador {
   display: flex;
@@ -182,6 +180,7 @@
 /* botão base */
 .btn {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -198,9 +197,12 @@
 /* cores */
 .btn.pass {
   background: #c62828;
+  color: white;
 }
 .btn.draw {
   background: #2e7d32;
+  color: white;
+
 }
 
 /* ícones materiais — controlar tamanho */
@@ -229,7 +231,9 @@
 
   .arc-title {
     font-size: 1.25rem;
-    letter-spacing: 6px;
+    color: transparent;
+        -webkit-text-stroke: 2px #999999; /* borda da letra */
+
     margin-bottom: 6px;
   }
   .curved-divider {
@@ -243,7 +247,6 @@
     gap: 12px;
     margin-top: 12px;
   }
-
 
   .controls {
     gap: 16px;
@@ -267,9 +270,6 @@
     padding: 24px;
   }
 
-  .top-area {
-    padding: 6px 0;
-  }
 
   .card.small {
     width: 72px;
@@ -284,9 +284,9 @@
 
   .arc-title {
     font-size: 36.78px;
-   color: transparent;
-   margin-top: 60px;    /* deixa a parte interna vazia */
-  -webkit-text-stroke: 2px #999999;  /* borda da letra */
+    color: transparent;
+    margin-top: 60px; /* deixa a parte interna vazia */
+    -webkit-text-stroke: 2px #999999; /* borda da letra */
   }
 
   .curved-divider {
@@ -302,19 +302,17 @@
     margin-top: 24px;
   }
 
-
   .controls {
     gap: 22px;
     padding-bottom: 48px;
   }
   .btn {
-    min-width: 220px;
-    padding: 16px 28px;
-    font-size: 1.05rem;
+    min-width:108px;
+    height: 78px;
+    font-size: 16px;
+    color: white;
   }
-  .mat-icon {
-    font-size: 26px;
-  }
+
 }
 
 /* =========================
@@ -323,7 +321,9 @@
 @media (max-width: 360px) {
   .arc-title {
     font-size: 1rem;
-    letter-spacing: 3px;
+    color: transparent;
+    -webkit-text-stroke: 2px #999999; /* borda da letra */
+
   }
   .btn {
     min-width: 120px;

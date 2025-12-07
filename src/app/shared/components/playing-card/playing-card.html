@@ -1,6 +1,17 @@
-<div class="card" [ngClass]="size">
+<div class="card" [ngClass]="size" [class.face-up]="isFaceUp">
   <div class="suit" [ngClass]="colorClass">
     {{ suitSymbol }}
   </div>
   <div class="rank" [ngClass]="colorClass">{{ card.rank }}</div>
+
+ <div class="card-back" *ngIf="!isFaceUp">
+    <!-- seu SVG com L5 -->
+    <svg width="88" height="106" viewBox="0 0 88 106" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="88" height="106" rx="6" ry="6" fill="#0b4b76" stroke="#06354f" stroke-width="0.8" />
+      <g transform="translate(44,53)" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">
+        <circle r="20" fill="#ffffff22"></circle>
+        <text y="6" font-size="20" fill="#ffffff">L5</text>
+      </g>
+    </svg>
+  </div>
 </div>
