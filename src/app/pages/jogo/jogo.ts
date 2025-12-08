@@ -48,6 +48,7 @@ export class Jogo {
 
     // 👉 escutando fechamento
     this.modalRef.afterClosed().subscribe(() => {
+      this.distribuirCartasIniciais();
       console.log('Modal foi fechado');
     });
   }
@@ -56,6 +57,26 @@ export class Jogo {
     if (this.modalRef) {
       this.modalRef.close();
     }
+  }
+
+  private distribuirCartasIniciais() {
+    // limpa mãos antes de distribuir
+    this.maoJogador = [];
+    this.maoDealer = [];
+    this.vezDoJogador = true;
+
+    // JOGADOR → 2 cartas viradas pra cima
+    this.baralho.draw(true);
+    this.baralho.draw(true);
+
+    // DEALER → 1 carta cima, 1 carta baixo
+    this.vezDoJogador = false; // força próxima carta ser do dealer
+    this.baralho.draw(true); // primeira carta do dealer (face up)
+
+    this.baralho.draw(false); // segunda carta do dealer (face down)
+
+    // devolve a vez pro jogador
+    this.vezDoJogador = true;
   }
   get totalCartasJogador(): number {
     return this.maoJogador.length;

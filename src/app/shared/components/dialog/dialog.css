@@ -36,8 +36,9 @@
 
 .modal-header h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
+  padding: 30px;
 }
 
 .close-btn {
@@ -76,10 +77,15 @@
   line-height: 1.4;
   font-size: 18px;
 }
+.modal-content ul h4 {
+  margin-bottom: 6px;
+  line-height: 1.4;
+  font-size: 18px;
+}
 
 /* Rodapé */
 .modal-footer {
-  padding: 16px;
+  padding: 50px;
   border-top: 1px solid #e5e5e5;
   text-align: right;
 }
