@@ -5,11 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { Baralho } from '../../shared/components/baralho/baralho';
 import { Card } from '../../models/card';
 import { PlayingCard } from '../../shared/components/playing-card/playing-card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-jogo',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, Baralho, PlayingCard],
+  imports: [CommonModule, MatIconModule, MatButtonModule, Baralho, PlayingCard, MatDividerModule],
   templateUrl: './jogo.html',
   styleUrl: './jogo.css',
 })
@@ -18,11 +19,12 @@ export class Jogo {
   maoJogador: Card[] = [];
   maoDealer: Card[] = [];
 
+  mensagemFinal: string = '';
+
   maxCartasJogador = 11;
 
   cartasJogador: Card[] = [];
 
-  // flag simples só para o exemplo — você pode controlar via lógica do jogo
   vezDoJogador = true;
 
   get totalCartasJogador(): number {
@@ -33,58 +35,114 @@ export class Jogo {
     return this.maoJogador.length < 11;
   }
 
-  // onCardDrawn(event: Card | null): void {
-  //   if (!event) {
-  //     console.log('Baralho vazio — não foi possível puxar carta.');
-  //     return;
-  //   }
-
-  //   event.faceUp = true;
-
-  //   if (this.vezDoJogador) {
-  //     this.maoJogador.push(event);
-  //     console.log('Carta adicionada na mão do jogador:', event);
-  //   } else {
-  //     this.maoDealer.push(event);
-  //     console.log('Carta adicionada na mão do dealer:', event);
-  //   }
-
-  //   this.vezDoJogador = !this.vezDoJogador;
-  // }
-
   onCardDrawn(event: Card | null): void {
-    if (!event) {
-      console.log('Baralho vazio — não foi possível puxar carta.');
-      return;
-    }
+    if (!event) return;
 
-    // virar a carta para exibição
-    event.faceUp = true;
-
-    // **JOGADOR**
+    // 1. JOGADOR
     if (this.vezDoJogador) {
-      // impede o jogador de ultrapassar 11 cartas
-      if (this.totalCartasJogador >= this.maxCartasJogador) {
-        console.warn('Limite de cartas atingido (11).');
+      this.maoJogador = [...this.maoJogador, event];
+
+      const totalJog = this.getPontuacao(this.maoJogador);
+
+      // estourou → perde na hora
+      if (totalJog > 21) {
+        this.vezDoJogador = false;
+        this.fimDeJogo('dealer');
         return;
       }
 
-      // atribuição imutável para garantir atualização visual
-      this.maoJogador = [...this.maoJogador, event];
-      console.log('Carta adicionada na mão do jogador:', event);
+      // se o jogador parar de pedir, dealer joga
+      if (!this.jogadorPodePedir) {
+        this.vezDoJogador = false;
+        setTimeout(() => this.jogadaDealer(), 600);
+        return;
+      }
+
+      return;
     }
 
-    // **DEALER**
+    // DEALER
     else {
       const isPrimeiraCartaDealer = this.maoDealer.length === 0;
-
       event.faceUp = isPrimeiraCartaDealer ? true : false;
+
       this.maoDealer = [...this.maoDealer, event];
-      console.log('Carta adicionada na mão do dealer:', event);
+
+      const totalDealer = this.getPontuacao(this.maoDealer);
+
+      // dealer estourou
+      if (totalDealer > 21) {
+        this.fimDeJogo('jogador');
+        return;
+      }
+
+      return;
+    }
+  }
+
+  jogadaDealer() {
+    const totalJogador = this.getPontuacao(this.maoJogador);
+
+    const loop = () => {
+      const totalDealer = this.getPontuacao(this.maoDealer);
+
+      // dealer deve comprar se:
+      const deveComprar = totalDealer < 17 || (totalDealer < totalJogador && totalJogador <= 21);
+
+      if (deveComprar) {
+        this.vezDoJogador = false;
+        this.baralho.draw(true); // dealer sempre vira pra cima
+        setTimeout(loop, 100);
+        return;
+      }
+
+      // dealer decide parar
+      this.fimDeJogo();
+    };
+
+    loop();
+  }
+
+  fimDeJogo(vencedor?: 'jogador' | 'dealer') {
+    const totalJog = this.getPontuacao(this.maoJogador);
+    const totalDeal = this.getPontuacao(this.maoDealer);
+
+    if (vencedor === 'jogador') {
+      this.mensagemFinal = 'Você venceu! Dealer estourou.';
+      alert(this.mensagemFinal);
+      return;
     }
 
-    // troca de vez (caso queira manter)
-    this.vezDoJogador = !this.vezDoJogador;
+    if (vencedor === 'dealer') {
+      this.mensagemFinal = 'Dealer venceu! Você estourou.';
+      alert(this.mensagemFinal);
+
+      return;
+    }
+
+    if (totalJog === totalDeal) {
+      this.mensagemFinal = 'Dealer venceu.';
+    }
+
+    if (totalJog > totalDeal) {
+      this.mensagemFinal = 'Você venceu!';
+      alert(this.mensagemFinal);
+
+      return;
+    }
+
+    if (totalDeal > totalJog) {
+      this.mensagemFinal = 'Dealer venceu!';
+      alert(this.mensagemFinal);
+
+      return;
+    }
+
+    // empate configura vitória do dealer
+    if (totalDeal === totalJog) {
+      this.mensagemFinal = 'Empate — Dealer vence pela regra da banca';
+      alert(this.mensagemFinal);
+    }
   }
 
   getPontuacao(mao: Card[]): number {
@@ -95,19 +153,17 @@ export class Jogo {
       if (c.rank === 'A') {
         ases++;
         total += 11;
-      } else if (['J', 'Q', 'K'].includes(c.rank)) total += 10;
-      else total += Number(c.rank);
+      } else if (['J', 'Q', 'K'].includes(c.rank)) {
+        total += 10;
+      } else {
+        total += Number(c.rank);
+      }
     }
 
-    // ajusta ases (11 → 1 quando necessário)
     while (total > 21 && ases > 0) {
       total -= 10;
       ases--;
     }
-
-    //   <div class="count-indicator">
-    //   {{ getPontuacao(maoJogador) }}
-    // </div>
 
     return total;
   }
@@ -117,14 +173,15 @@ export class Jogo {
   }
 
   onPass() {
-    console.log('Passar');
+    this.vezDoJogador = false;
+    setTimeout(() => this.jogadaDealer(), 600);
   }
 
   pedirCarta() {
+    if (!this.baralho) return;
     if (!this.jogadorPodePedir) return;
 
-    // puxa carta do baralho SEM virar
-    this.baralho.draw(false);
+    this.baralho.draw(true); // vira sempre pra cima
   }
 
   get contadorCartas() {

@@ -1,5 +1,19 @@
+<!--  -->
+<div
+  style="
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+
+    background-color: white;
+  "
+>
+  <mat-divider style="width: 1320px"></mat-divider>
+</div>
+
 <div class="viewport">
-  <div class="frame">
+  <div class="frame" style="background-color: #00000040;">
     <!-- TOPO -->
     <div class="badge-right">
       <app-baralho #baralhoRef (cardDrawn)="onCardDrawn($event)" [clickable]="false"> </app-baralho>
