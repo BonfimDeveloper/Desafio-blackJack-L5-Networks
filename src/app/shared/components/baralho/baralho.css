@@ -12,7 +12,7 @@ border-radius:6px;
 box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 transition: transform 300ms ease, opacity 250ms ease;
 overflow:hidden;
-background:white;
+background:#464775;
 display:flex;align-items:center;justify-content:center;
 }
 
@@ -28,4 +28,12 @@ position:absolute; right:-10px; bottom:-30px; background:#111;color:#fff;padding
 /* small responsiveness: keep proportions */
 @media (max-width:420px){
 .deck-stack{transform:scale(0.9)}
+}
+
+
+.card-back {
+  background: #464775; /* cor do fundo do baralho */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
