@@ -1,0 +1,66 @@
+<div class="modal-backdrop"></div>
+
+<div class="modal-container">
+  <div class="modal-header">
+    <h2>Regras do Blackjack 21</h2>
+  </div>
+
+  <div class="modal-content">
+    <section>
+      <h3>🎯 Objetivo do Jogo</h3>
+      <p>Chegar o mais próximo possível de <strong>21 pontos</strong> sem ultrapassar.</p>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section>
+      <h3>🃏 Valores das Cartas</h3>
+      <ul>
+        <li><strong>2 a 10</strong> – valem o número indicado.</li>
+        <li><strong>J, Q, K</strong> – valem <strong>10 pontos</strong>.</li>
+        <li>
+          <strong>Ás (A)</strong> – vale <strong>11</strong> ou <strong>1</strong>, o que for melhor
+          para sua mão.
+        </li>
+      </ul>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section>
+      <h3>👤 Turno do Jogador</h3>
+      <ul>
+        <li>Pode pedir quantas cartas quiser.</li>
+        <li>Se passar de <strong>21</strong>, perde automaticamente.</li>
+        <li>Pode escolher <strong>parar</strong> quando quiser.</li>
+      </ul>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section>
+      <h3>🤖 Turno do Dealer</h3>
+      <ul>
+        <li>O dealer joga automaticamente após o jogador parar.</li>
+        <li>Compra cartas até atingir <strong>17 pontos ou mais</strong>.</li>
+        <li>Se ultrapassar <strong>21</strong>, o jogador vence.</li>
+      </ul>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section>
+      <h3>🏆 Condições de Vitória</h3>
+      <ul>
+        <li>Quem estiver mais próximo de <strong>21</strong> vence.</li>
+        <li>Se o jogador estourar → <strong>Dealer vence</strong>.</li>
+        <li>Se o dealer estourar → <strong>Jogador vence</strong>.</li>
+        <li>Empate → <strong>Dealer vence</strong> pela regra da banca.</li>
+      </ul>
+    </section>
+  </div>
+
+  <mat-dialog-actions class="modal-footer">
+    <button mat-dialog-close>Jogar</button>
+  </mat-dialog-actions>
+</div>

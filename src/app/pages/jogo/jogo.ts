@@ -6,27 +6,57 @@ import { Baralho } from '../../shared/components/baralho/baralho';
 import { Card } from '../../models/card';
 import { PlayingCard } from '../../shared/components/playing-card/playing-card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Dialog } from '../../shared/components/dialog/dialog';
 
 @Component({
   selector: 'app-jogo',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, Baralho, PlayingCard, MatDividerModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    Baralho,
+    PlayingCard,
+    MatDividerModule,
+    MatDialogModule,
+  ],
   templateUrl: './jogo.html',
   styleUrl: './jogo.css',
 })
 export class Jogo {
   @ViewChild('baralhoRef') baralho!: Baralho;
+  modalRef!: MatDialogRef<Dialog>;
   maoJogador: Card[] = [];
   maoDealer: Card[] = [];
-
   mensagemFinal: string = '';
-
   maxCartasJogador = 11;
-
   cartasJogador: Card[] = [];
-
   vezDoJogador = true;
 
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.abrirModalInicio();
+  }
+
+  abrirModalInicio() {
+    this.modalRef = this.dialog.open(Dialog, {
+      width: '2000px',
+      disableClose: true,
+    });
+
+    // 👉 escutando fechamento
+    this.modalRef.afterClosed().subscribe(() => {
+      console.log('Modal foi fechado');
+    });
+  }
+
+  fecharModalInicio() {
+    if (this.modalRef) {
+      this.modalRef.close();
+    }
+  }
   get totalCartasJogador(): number {
     return this.maoJogador.length;
   }
