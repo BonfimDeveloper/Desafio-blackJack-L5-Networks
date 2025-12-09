@@ -7,7 +7,7 @@
     </div>
     <div class="div-itens" >
       <span>Partidas</span>
-      <span>{{ auth.user()?.stats?.wins }}</span>
+      <span>{{ estatisticas.total }}</span>
     </div>
   </div>
   <div class="divs-sub" >
@@ -16,7 +16,7 @@
     </div>
     <div class="div-itens">
       <span>Vitórias</span>
-      <span>{{ auth.user()?.stats?.wins }}</span>
+      <span>{{ estatisticas.vitorias }}</span>
     </div>
   </div>
   <div class="divs-sub" >
@@ -25,7 +25,7 @@
     </div>
     <div class="div-itens">
       <span>Derrotas</span>
-      <span>{{ auth.user()?.stats?.losses }}</span>
+      <span>{{ estatisticas.derrotas }}</span>
     </div>
   </div>
 </div>

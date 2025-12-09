@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { LoaderService } from '../../core/services/loader.service';
+import { StorageService } from '../../core/services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,21 @@ import { LoaderService } from '../../core/services/loader.service';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  constructor(public auth: AuthService, private router: Router, private loader: LoaderService) {}
+  estatisticas = {
+    total: 0,
+    vitorias: 0,
+    derrotas: 0,
+  };
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private loader: LoaderService,
+    private storage: StorageService
+  ) {}
+
+  ngOnInit(): void {
+    this.calcularEstatisticas();
+  }
 
   //Navega para página de visualização do histórico das partidas
   public visualizarHistorico(): void {
@@ -47,5 +62,18 @@ export class Dashboard {
       this.router.navigate(['/game']);
       this.loader.hide();
     }, 1000);
+  }
+
+  calcularEstatisticas() {
+    const partidas = this.storage.listarPartidas();
+
+    const vitorias = partidas.filter((p) => p.resultado === 'VITÓRIA').length;
+    const derrotas = partidas.filter((p) => p.resultado === 'DERROTA').length;
+
+    this.estatisticas = {
+      total: partidas.length,
+      vitorias,
+      derrotas,
+    };
   }
 }
