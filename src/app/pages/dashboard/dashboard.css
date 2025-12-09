@@ -1,45 +1,67 @@
 /* Container branco */
 .sub-header {
+  width: 100%;
+  max-width: 1320px;
+  margin: auto;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 20px 10px;
   border: 1px solid #999999;
   border-radius: 10px;
   background-color: white;
-  padding: 20px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  padding-right: 20px;
+  padding-left: 20px;
+
 }
 
 /* Linha interna */
 .divs-sub {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: center;      /* CORRIGIDO */
+  justify-content: center;  /* CORRIGIDO */
   gap: 10px;
 }
-.div-itens{
-    display: flex; flex-direction: column; gap: 4px;
-  }
+
+/* Ícones SVG corrigidos */
+.divs-sub svg,
+.icon {
+  display: inline-block;    /* IMPEDIR que quebre o alinhamento */
+}
+
+/* Conteúdo de texto */
+.div-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+
+}
+
+
+
+
 
 /* Botão principal container */
 .div-btn-start-game {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
-/* Botão principal */
+/* Botão principal (mobile) */
 .btn-start-game {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: #366cd4;
   color: white;
-  width: 90%;
-  max-width: 400px;
+  width: 100%;
+  max-width: 545;
   height: 80px;
   border-radius: 6px;
   font-size: 18px;
@@ -48,167 +70,103 @@
   cursor: pointer;
 }
 
-/* Hover */
 .btn-start-game:hover {
   transform: scale(1.05);
 }
 
-/* HISTÓRICO */
+/* Histórico */
 .history-view {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   padding-top: 20px;
 }
 
-/* Card do histórico */
 .history-view-child {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  font-size: 14px;
-  gap: 4px;
-  width: 90%;
-  max-width: 320px;
-  height: auto;
-  padding: 10px;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 355px;
+  padding: 12px;
   border: 1px solid #999999;
   border-radius: 6px;
-  background-color: white;
+  background: white;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease-in-out;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .history-view-child:hover {
   transform: scale(1.05);
 }
 
-/*=====================================================================
-  TABLET (mínimo 601px e máximo 1024px)
-=====================================================================*/
-
+/* ============================================
+  TABLET (601–1024px)
+=============================================== */
 @media (min-width: 601px) and (max-width: 1024px) {
-  .btn-start-game {
-    width: 80%;
-    height: 100px;
-    font-size: 24px;
-    gap: 20px;
-  }
 
   .sub-header {
     flex-direction: row;
     justify-content: space-between;
-    padding: 30px 40px;
     gap: 20px;
   }
 
-  .history-view {
-    padding-top: 50px;
+  .btn-start-game {
+    width: 75%;
+    max-width: 500px;
+    height: 100px;
+    font-size: 22px;
+    gap: 20px;
   }
 
   .history-view-child {
     font-size: 16px;
-    width: 80%;
     max-width: 355px;
-  }
-  .div-itens{
-    display: flex; flex-direction: column; gap: 4px;
   }
 }
 
-/*=====================================================================
-  DESKTOP (a partir de 1025px)
-=====================================================================*/
+/* ============================================
+  DESKTOP (1025px+)
+=============================================== */
 @media (min-width: 1025px) {
+
   .sub-header {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 47px;
-    margin-right: 47px;
-    border: 1px solid #999999;
-    border-radius: 10px;
-    background-color: white;
-    padding-right: 60px;
-    padding-left: 60px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
   }
 
-  .icon {
-    font-size: 64px;
-    width: 60px;
-    height: 48px;
-    padding-bottom: 20px;
+  .div-itens span {
+    font-size: 20px;
+    font-weight:400;
   }
 
-  .divs-sub {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .div-itens{
-    display: flex; flex-direction: column; gap: 4px; font-size: 20px;
-  }
-
-  .div-btn-start-game {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
+  /* BOTÃO OBRIGATÓRIO DO PROJETO — MANTIDO */
   .btn-start-game {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #366cd4;
-    color: white;
-    max-width: none;
-    width: 545px;
-    height: 134px;
-    border-radius: 6px;
-    margin-top: 200px;
-    font-size: 32px;
-    gap: 40px;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
+    width: 545px !important;
+    height: 134px !important;
+
+    font-size: 38px;
+    font-weight: 600;
+    gap: 35px;
+    margin-top: 80px;
   }
+
   .btn-start-game:hover {
-    transform: scale(1.1);
+    transform: scale(1.07);
   }
 
   .history-view {
-    display: flex;
-    justify-content: start;
-    width: 100%;
-    padding-left: 150px;
-    padding-top: 300px;
+    width: 1320px;
+    justify-content: center;
+    padding-top: 200px;
   }
 
   .history-view-child {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
     font-size: 18px;
-    gap: 4px;
-    width: 355px;
+    max-width: 380px;
     height: 90px;
-    border: 1px solid #999999;
-    border-radius: 6px;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-  }
-
-  .history-view-child:hover {
-    transform: scale(1.1);
   }
 }

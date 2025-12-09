@@ -203,56 +203,43 @@ export class Jogo {
 
     loop();
   }
-
   fimDeJogo(vencedor?: 'jogador' | 'dealer') {
     if (this.jogoEncerrado) return; // já finalizado
+
     this.jogoEncerrado = true;
-
     this.revelarCartasDealer();
-    this.registrarPartidaNoHistorico();
 
-    const totalJog = this.getPontuacao(this.maoJogador);
-    const totalDeal = this.getPontuacao(this.maoDealer);
-
-    // forçar mostrar carta do dealer no final
+    // Força a exibição da carta do dealer e encerra o turno do jogador
     this.mostraCartaDealerFimJogo = true;
     this.vezDoJogador = false;
 
-    // 1. Vitória direta por estourar
-    if (vencedor === 'jogador') {
-      this.toast.success('Você venceu! Dealer estourou.');
-      return;
+    const totalJog = this.getPontuacao(this.maoJogador);
+
+    // Usa a função decidirResultado para obter VITÓRIA ou DERROTA (o EMPATE é tratado como DERROTA na sua implementação)
+    const resultado = this.decidirResultado();
+
+    if (resultado === 'VITÓRIA') {
+      this.toast.success(`🎉 Vitória! Você alcançou ${totalJog} pontos.`);
+    } else {
+      // Cobre DERROTA e EMPATE (tratado como DERROTA)
+      let mensagem = `😭 Derrota. Você terminou com ${totalJog} pontos.`;
+
+      // Adiciona um contexto simples se o Jogador estourou
+      if (totalJog > 21) {
+        mensagem = `😭 Derrota. Você estourou com ${totalJog} pontos.`;
+      } else if (
+        resultado === 'DERROTA' &&
+        this.getPontuacao(this.maoDealer) === 21 &&
+        this.maoDealer.length === 2
+      ) {
+        // Caso Blackjack do Dealer
+        mensagem = `😭 Derrota. Dealer fez Blackjack. Você terminou com ${totalJog} pontos.`;
+      }
+
+      this.toast.error(mensagem);
     }
 
-    if (vencedor === 'dealer') {
-      this.toast.error('Dealer venceu! Você estourou.');
-      return;
-    }
-
-    // 2. Blackjack imediato
-    if (totalJog === 21) {
-      this.toast.success('Blackjack! Você venceu!');
-      return;
-    }
-
-    if (totalDeal === 21) {
-      this.toast.error('Dealer venceu! Blackjack da banca.');
-      return;
-    }
-
-    // 3. Comparação normal
-    if (totalJog > totalDeal) {
-      this.toast.success('Você venceu!');
-      return;
-    }
-
-    if (totalDeal > totalJog) {
-      this.toast.error('Dealer venceu!');
-      return;
-    }
-
-    // 4. Empate (banca vence)
-    this.toast.error('Empate — Dealer vence pela regra da banca');
+    this.registrarPartidaNoHistorico();
   }
 
   private decidirResultado(): 'VITÓRIA' | 'DERROTA' | 'EMPATE' {
