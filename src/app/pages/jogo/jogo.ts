@@ -42,6 +42,8 @@ export class Jogo {
   vezDoJogador = true;
   mostraCartaDealerFimJogo: Boolean = false;
 
+  jogoEncerrado: boolean = false;
+
   constructor(
     private dialog: MatDialog,
     private loader: LoaderService,
@@ -72,7 +74,29 @@ export class Jogo {
     }
   }
 
+  resetJogo() {
+    // limpa estados
+    this.jogoEncerrado = false;
+    this.mostraCartaDealerFimJogo = false;
+    this.mensagemFinal = '';
+
+    // limpa mãos
+    this.maoJogador = [];
+    this.maoDealer = [];
+
+    // reseta vez do jogador
+    this.vezDoJogador = true;
+
+    // inicia nova rodada
+    setTimeout(() => {
+      this.distribuirCartasIniciais();
+    }, 200);
+  }
+
   private distribuirCartasIniciais() {
+    this.jogoEncerrado = false;
+    this.mostraCartaDealerFimJogo = false;
+    this.mensagemFinal = '';
     // limpa mãos antes de distribuir
     this.maoJogador = [];
     this.maoDealer = [];
@@ -96,7 +120,7 @@ export class Jogo {
   }
 
   get jogadorPodePedir(): boolean {
-    return this.maoJogador.length < 11;
+    return this.maoJogador.length < this.maxCartasJogador;
   }
 
   onCardDrawn(event: Card | null): void {
@@ -115,7 +139,15 @@ export class Jogo {
         return;
       }
 
-      // se o jogador parar de pedir, dealer joga
+      // se atingiu 21 → parar e chamar dealer automaticamente
+      if (totalJog === 21) {
+        this.vezDoJogador = false;
+
+        this.fimDeJogo('jogador');
+        return;
+      }
+
+      // se o jogador parar de pedir automaticamente por limite
       if (!this.jogadorPodePedir) {
         this.vezDoJogador = false;
         setTimeout(() => this.jogadaDealer(), 600);
@@ -148,12 +180,14 @@ export class Jogo {
   }
 
   jogadaDealer() {
+    if (this.jogoEncerrado) return;
+
     const totalJogador = this.getPontuacao(this.maoJogador);
 
     const loop = () => {
+      if (this.jogoEncerrado) return; // se acabou antes
       const totalDealer = this.getPontuacao(this.maoDealer);
 
-      // dealer deve comprar se:
       const deveComprar = totalDealer < 17 || (totalDealer < totalJogador && totalJogador <= 21);
 
       if (deveComprar) {
@@ -171,11 +205,18 @@ export class Jogo {
   }
 
   fimDeJogo(vencedor?: 'jogador' | 'dealer') {
+    if (this.jogoEncerrado) return; // já finalizado
+    this.jogoEncerrado = true;
+
     this.revelarCartasDealer();
     this.registrarPartidaNoHistorico();
 
     const totalJog = this.getPontuacao(this.maoJogador);
     const totalDeal = this.getPontuacao(this.maoDealer);
+
+    // forçar mostrar carta do dealer no final
+    this.mostraCartaDealerFimJogo = true;
+    this.vezDoJogador = false;
 
     // 1. Vitória direta por estourar
     if (vencedor === 'jogador') {
@@ -189,12 +230,12 @@ export class Jogo {
     }
 
     // 2. Blackjack imediato
-    if (totalJog === 21 && totalDeal !== 21) {
+    if (totalJog === 21) {
       this.toast.success('Blackjack! Você venceu!');
       return;
     }
 
-    if (totalDeal === 21 && totalJog !== 21) {
+    if (totalDeal === 21) {
       this.toast.error('Dealer venceu! Blackjack da banca.');
       return;
     }
@@ -259,14 +300,11 @@ export class Jogo {
   }
 
   registrarPartida(): void {
+    const resultado = this.decidirResultado();
     this.storage.registrarPartida({
       jogador: [...this.maoJogador],
       dealer: [...this.maoDealer],
-      resultado: this.mensagemFinal.includes('venceu')
-        ? 'VITÓRIA'
-        : this.mensagemFinal.includes('perdeu') || this.mensagemFinal.includes('Dealer venceu')
-        ? 'DERROTA'
-        : 'EMPATE',
+      resultado,
       data: new Date().toLocaleString('pt-BR'),
     });
   }
@@ -296,6 +334,7 @@ export class Jogo {
 
   revelarCartasDealer() {
     this.maoDealer = this.maoDealer.map((c) => ({ ...c, faceUp: true }));
+    this.mostraCartaDealerFimJogo = true;
   }
 
   onPass() {
@@ -311,6 +350,6 @@ export class Jogo {
   }
 
   get contadorCartas() {
-    return `${this.cartasJogador.length}/${this.maxCartasJogador}`;
+    return `${this.maoJogador.length}/${this.maxCartasJogador}`;
   }
 }
