@@ -5,7 +5,6 @@
     display: flex;
     justify-content: center;
 
-
     background-color: white;
   "
 >
@@ -13,7 +12,7 @@
 </div>
 
 <div class="viewport">
-  <div class="frame" style="background-color: #00000040;">
+  <div class="frame" style="background-color: #00000040">
     <!-- TOPO -->
     <div class="badge-right">
       <app-baralho #baralhoRef (cardDrawn)="onCardDrawn($event)" [clickable]="false"> </app-baralho>
@@ -101,5 +100,6 @@
         <span>PEDIR</span>
       </button>
     </div>
+    <app-button-back-dashboard></app-button-back-dashboard>
   </div>
 </div>

@@ -33,7 +33,7 @@ export class Dashboard {
     this.loader.show();
 
     setTimeout(() => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/history']);
       this.loader.hide();
     }, 1000);
     console.log('funcionou view');

@@ -8,6 +8,11 @@ import { PlayingCard } from '../../shared/components/playing-card/playing-card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Dialog } from '../../shared/components/dialog/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoaderService } from '../../core/services/loader.service';
+import { ToastService } from '../../core/services/toast.service';
+import { StorageService } from '../../core/services/storage.service';
+import { ButtonBackDashboard } from '../../shared/components/button-back-dashboard/button-back-dashboard';
 
 @Component({
   selector: 'app-jogo',
@@ -20,6 +25,8 @@ import { Dialog } from '../../shared/components/dialog/dialog';
     PlayingCard,
     MatDividerModule,
     MatDialogModule,
+    MatSnackBarModule,
+    ButtonBackDashboard,
   ],
   templateUrl: './jogo.html',
   styleUrl: './jogo.css',
@@ -33,8 +40,14 @@ export class Jogo {
   maxCartasJogador = 11;
   cartasJogador: Card[] = [];
   vezDoJogador = true;
+  mostraCartaDealerFimJogo: Boolean = false;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private loader: LoaderService,
+    private toast: ToastService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.abrirModalInicio();
@@ -117,6 +130,8 @@ export class Jogo {
       const isPrimeiraCartaDealer = this.maoDealer.length === 0;
       event.faceUp = isPrimeiraCartaDealer ? true : false;
 
+      this.mostraCartaDealerFimJogo = event.faceUp;
+
       this.maoDealer = [...this.maoDealer, event];
 
       const totalDealer = this.getPontuacao(this.maoDealer);
@@ -124,6 +139,7 @@ export class Jogo {
       // dealer estourou
       if (totalDealer > 21) {
         this.fimDeJogo('jogador');
+
         return;
       }
 
@@ -155,45 +171,104 @@ export class Jogo {
   }
 
   fimDeJogo(vencedor?: 'jogador' | 'dealer') {
+    this.revelarCartasDealer();
+    this.registrarPartidaNoHistorico();
+
     const totalJog = this.getPontuacao(this.maoJogador);
     const totalDeal = this.getPontuacao(this.maoDealer);
 
+    // 1. Vitória direta por estourar
     if (vencedor === 'jogador') {
-      this.mensagemFinal = 'Você venceu! Dealer estourou.';
-      alert(this.mensagemFinal);
+      this.toast.success('Você venceu! Dealer estourou.');
       return;
     }
 
     if (vencedor === 'dealer') {
-      this.mensagemFinal = 'Dealer venceu! Você estourou.';
-      alert(this.mensagemFinal);
-
+      this.toast.error('Dealer venceu! Você estourou.');
       return;
     }
 
-    if (totalJog === totalDeal) {
-      this.mensagemFinal = 'Dealer venceu.';
+    // 2. Blackjack imediato
+    if (totalJog === 21 && totalDeal !== 21) {
+      this.toast.success('Blackjack! Você venceu!');
+      return;
     }
 
-    if (totalJog > totalDeal) {
-      this.mensagemFinal = 'Você venceu!';
-      alert(this.mensagemFinal);
+    if (totalDeal === 21 && totalJog !== 21) {
+      this.toast.error('Dealer venceu! Blackjack da banca.');
+      return;
+    }
 
+    // 3. Comparação normal
+    if (totalJog > totalDeal) {
+      this.toast.success('Você venceu!');
       return;
     }
 
     if (totalDeal > totalJog) {
-      this.mensagemFinal = 'Dealer venceu!';
-      alert(this.mensagemFinal);
-
+      this.toast.error('Dealer venceu!');
       return;
     }
 
-    // empate configura vitória do dealer
-    if (totalDeal === totalJog) {
-      this.mensagemFinal = 'Empate — Dealer vence pela regra da banca';
-      alert(this.mensagemFinal);
+    // 4. Empate (banca vence)
+    this.toast.error('Empate — Dealer vence pela regra da banca');
+  }
+
+  private decidirResultado(): 'VITÓRIA' | 'DERROTA' | 'EMPATE' {
+    const totalJog = this.getPontuacao(this.maoJogador);
+    const totalDeal = this.getPontuacao(this.maoDealer);
+
+    // se jogador estourou => derrota
+    if (totalJog > 21) return 'DERROTA';
+
+    // se dealer estourou => vitória
+    if (totalDeal > 21) return 'VITÓRIA';
+
+    // nenhum estourou -> comparar valores
+    if (totalJog > totalDeal) return 'VITÓRIA';
+    if (totalDeal > totalJog) return 'DERROTA';
+
+    // empate -> por regra da banca é derrota do jogador
+    return 'DERROTA';
+  }
+
+  registrarPartidaNoHistorico(): void {
+    const resultado = this.decidirResultado(); // VITORIA | DERROTA | EMPATE (se optar)
+
+    const partida = {
+      jogador: [...this.maoJogador],
+      dealer: [...this.maoDealer],
+      resultado,
+      data: new Date().toLocaleString('pt-BR'),
+    };
+
+    // evitar duplicatas simples: comparar com o último registro salvo
+    const ult = this.storage.listarPartidas()[0];
+    if (ult) {
+      const isSame =
+        JSON.stringify(ult.jogador) === JSON.stringify(partida.jogador) &&
+        JSON.stringify(ult.dealer) === JSON.stringify(partida.dealer) &&
+        ult.resultado === partida.resultado;
+      if (isSame) {
+        // já está salvo — não registra de novo
+        return;
+      }
     }
+
+    this.storage.registrarPartida(partida);
+  }
+
+  registrarPartida(): void {
+    this.storage.registrarPartida({
+      jogador: [...this.maoJogador],
+      dealer: [...this.maoDealer],
+      resultado: this.mensagemFinal.includes('venceu')
+        ? 'VITÓRIA'
+        : this.mensagemFinal.includes('perdeu') || this.mensagemFinal.includes('Dealer venceu')
+        ? 'DERROTA'
+        : 'EMPATE',
+      data: new Date().toLocaleString('pt-BR'),
+    });
   }
 
   getPontuacao(mao: Card[]): number {

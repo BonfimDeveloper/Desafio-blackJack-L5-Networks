@@ -1,0 +1,120 @@
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.div-tabela {
+  width: 1320px;
+  height: 777px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+
+}
+
+.tabela {
+  width: 1320px;
+  background-color: white;
+  border-collapse: separate;
+  border-spacing: 0 12px; /* Espaço entre as linhas */
+  font-family: 'Inter', sans-serif;
+}
+
+.tabela thead tr {
+  background: transparent;
+}
+
+.tabela th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+}
+
+.tabela tbody tr {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabela tbody td {
+  padding: 12px 12px;
+  vertical-align: middle;
+  color: #333;
+}
+
+/* Colunas com cartas */
+.tabela tbody td app-card {
+  margin-right: 4px;
+}
+
+/* Resultado */
+.tabela tbody td:nth-child(3) {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Vitória / Derrota cores opcionais */
+.tabela tbody td:nth-child(3).vitoria {
+  color: #1a7f1a;
+}
+
+.tabela tbody td:nth-child(3).derrota {
+  color: #c62828;
+}
+
+.tabela tbody td:nth-child(3).empate {
+  color: #555;
+}
+
+/* Ajuste para cards em linha */
+td app-card {
+  display: inline-block;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .tabela th,
+  .tabela td {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  td app-card {
+    transform: scale(0.8);
+  }
+}
+
+:host ::ng-deep app-playing-card.carta-mini {
+  width: 45.66px !important;
+  height: 55px !important;
+  display: inline-block !important;
+}
+
+:host ::ng-deep app-playing-card.carta-mini .card {
+  width: 45.66px !important;
+  height: 55px !important;
+}
+
+:host ::ng-deep app-playing-card.carta-mini .rank {
+  font-size: 20px;
+}
+
+
+.divider-row td {
+  height: 2px;
+  background-color: #999999;
+  padding: 0;
+}
+
+
+.tabela tbody td {
+  border-bottom: 2px solid #999999;
+}
+
+

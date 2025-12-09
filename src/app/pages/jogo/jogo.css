@@ -351,3 +351,12 @@
   padding: 0;
   transition: transform 0.2s ease;
 }
+
+
+
+.toast-custom {
+  top: 300px !important;
+  bottom: 40px !important;
+  right: 50px !important;
+  left: auto !important;
+}
