@@ -362,3 +362,40 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.btn-reset:hover{
+  background-color: #345ae4;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+
+
+}
+
+
+
+/* Estilo base para quando qualquer botão com a classe .btn estiver desabilitado */
+.btn:disabled {
+    /* Mudar a aparência geral */
+    opacity: 0.6; /* Deixar semi-transparente */
+    cursor: not-allowed; /* Mostrar cursor de "Não Permitido" */
+
+    /* Remover efeitos de hover e active se aplicáveis */
+    transform: scale(1);
+    box-shadow: none;
+}
+
+/* Você pode querer especificar o estilo do texto e SVGs internos */
+.btn:disabled span,
+.btn:disabled svg path {
+    color: #ccc; /* Cor mais clara para o texto/ícones (se for texto) */
+    fill: #ccc; /* Cor mais clara para o SVG */
+}
+
+/* Exemplo de como escurecer o background do botão desabilitado */
+.btn.pass:disabled {
+    background-color: #555845; /* Uma cor mais neutra para o botão PASSAR */
+}
+
+.btn.draw:disabled {
+    background-color: #554545; /* Uma cor mais neutra para o botão PEDIR */
+}

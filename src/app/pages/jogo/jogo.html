@@ -56,7 +56,7 @@
 
     <!-- BOTÕES -->
     <div class="controls">
-      <button class="btn pass" (click)="onPass()">
+      <button class="btn pass" (click)="onPass()" [disabled]="jogoEncerrado || !jogadorPodePedir">
         <!-- <span class="material-symbols-outlined"> back_hand </span> -->
 
         <svg
@@ -75,7 +75,7 @@
         <span>PASSAR</span>
       </button>
 
-      <button (click)="pedirCarta()" class="btn draw" [disabled]="!jogadorPodePedir">
+      <button (click)="pedirCarta()" class="btn draw" [disabled]="jogoEncerrado || !jogadorPodePedir">
         <!-- <span class="material-symbols-outlined"> arrow_downward </span> -->
         <svg
           width="32"

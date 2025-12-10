@@ -75,6 +75,11 @@ export class Jogo {
   }
 
   resetJogo() {
+    // 1. Resetar o componente Baralho
+    if (this.baralho && this.baralho.reset) {
+      // Verifica se a referência e o método existem
+      this.baralho.reset(); // 💡 CHAMA O MÉTODO DE RESET DO BARALHO
+    }
     // limpa estados
     this.jogoEncerrado = false;
     this.mostraCartaDealerFimJogo = false;
