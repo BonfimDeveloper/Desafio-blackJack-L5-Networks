@@ -68,8 +68,11 @@ export class Jogo {
 
     // 👉 escutando fechamento
     this.modalRef.afterClosed().subscribe(() => {
-      this.distribuirCartasIniciais();
-      console.log('Modal foi fechado');
+      // 💡 CORREÇÃO: Empurra a distribuição para o próximo ciclo de eventos
+      setTimeout(() => {
+        this.distribuirCartasIniciais();
+        console.log('Modal foi fechado');
+      }, 0); // O timeout de 0ms adia a execução para o próximo tick do evento loop
     });
   }
 
@@ -154,7 +157,6 @@ export class Jogo {
       // se atingiu 21 → parar e chamar dealer automaticamente
       if (totalJog === 21) {
         this.vezDoJogador = false;
-
         this.fimDeJogo('jogador');
         return;
       }

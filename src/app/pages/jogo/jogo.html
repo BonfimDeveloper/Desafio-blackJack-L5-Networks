@@ -121,7 +121,7 @@
     </app-vitoria>
 
     <app-derrota
-      *ngIf="jogoEncerrado && (resultadoFinal === 'DERROTA' || resultadoFinal === 'EMPATE')"
+      *ngIf="jogoEncerrado && (resultadoFinal === 'DERROTA' )"
       [pontuacaoFinal]="getPontuacao(maoJogador)"
       (jogarNovamente)="resetJogo()"
     >
