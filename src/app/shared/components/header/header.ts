@@ -15,7 +15,7 @@ import { LoaderService } from '../../../core/services/loader.service';
 export class HeaderComponent {
   constructor(public auth: AuthService, private router: Router, private loader: LoaderService) {}
 
-  //Desloga usuário
+  //Deslogar usuário
   public sairDoJogo(): void {
     this.loader.show();
 

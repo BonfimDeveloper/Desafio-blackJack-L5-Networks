@@ -18,21 +18,8 @@ export class PlayingCard {
   }
 
   get isFaceUp(): boolean {
-    // precedence: explicit @Input faceUp, else fallback para card.faceUp
     return this.faceUp !== undefined ? this.faceUp : !!this.card?.faceUp;
   }
-
-  /** Converte suit textual para símbolo */
-  // get suitSymbol(): string {
-  //   const suitMap: any = {
-  //     hearts: '♥',
-  //     diamonds: '♦',
-  //     spades: '♠',
-  //     clubs: '♣',
-  //   };
-
-  //   return suitMap[this.card.suit] || this.card.suit;
-  // }
 
   get suitSymbol(): string {
     const s = this.card?.suit;

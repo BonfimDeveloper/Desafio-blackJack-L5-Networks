@@ -16,23 +16,18 @@ background:#464775;
 display:flex;align-items:center;justify-content:center;
 }
 
-
 .card.back svg{display:block}
-
 
 .deck-count{
 position:absolute; right:-10px; bottom:-30px; background:#111;color:#fff;padding:2px 6px;border-radius:12px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,0.4)
 }
 
-
-/* small responsiveness: keep proportions */
 @media (max-width:420px){
 .deck-stack{transform:scale(0.9)}
 }
 
-
 .card-back {
-  background: #464775; /* cor do fundo do baralho */
+  background: #464775;
   display: flex;
   align-items: center;
   justify-content: center;

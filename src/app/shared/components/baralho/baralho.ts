@@ -3,16 +3,6 @@ import { Card } from '../../../models/card';
 import { Suit } from '../../../models/suit';
 import { CommonModule } from '@angular/common';
 
-// export type Suit = '♠' | '♥' | '♦' | '♣';
-
-// export class Card {
-//   constructor(
-//     public id: number,
-//     public rank: string,
-//     public suit: Suit,
-//     public faceUp: boolean = false
-//   ) {}
-// }
 @Component({
   selector: 'app-baralho',
   standalone: true,
@@ -43,7 +33,6 @@ export class Baralho {
 
   // visualStack controla quantas cartas sobrepostas são exibidas para formar o visual do baralho
   get visualStack(): number[] {
-    // show up to 6 visible layered backs
     const count = Math.min(6, this.cards.length);
     return Array(count).fill(0);
   }

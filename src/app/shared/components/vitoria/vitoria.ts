@@ -21,7 +21,7 @@ export class Vitoria {
     this.jogarNovamente.emit();
   }
 
-  // Função utilitária para cores aleatórias dos confetes
+  // Função  para cores aleatórias dos confetes
   getRandomColor(): string {
     const colors = [
       '#f44336',

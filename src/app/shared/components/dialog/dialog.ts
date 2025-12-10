@@ -14,8 +14,5 @@ export class Dialog {
 
   fecharModal() {
     this.modalAberto = false;
-
-    // Aqui você pode iniciar o jogo, resetar o baralho, etc.
-    console.log('Modal fechado — iniciar jogo!');
   }
 }

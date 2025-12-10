@@ -18,7 +18,6 @@ export class BlackjackService {
 
   private criarDeck() {
     const newDeck: number[] = [];
-    // valores 1..10; tratar A como 11 simples: você pode adaptar
     for (let v = 1; v <= 11; v++) {
       for (let i = 0; i < 4; i++) newDeck.push(v);
     }
@@ -32,10 +31,8 @@ export class BlackjackService {
       .map((z) => z.a);
   }
 
-  /*
-  Esse método remove e retorna
+  /*  remove e retorna
   a próxima carta do baralho
-  (como se fosse “comprar” uma carta no Blackjack).
   */
   private removerEretornarProximaCarta() {
     const d = this.deck();
@@ -48,9 +45,7 @@ export class BlackjackService {
     this.criarDeck();
     this.player.set([]);
     this.dealer.set([]);
-    // dealer 1 carta
     this.dealer.update((s) => [...s, this.removerEretornarProximaCarta()]);
-    // player 2 cartas
     this.player.update((s) => [
       ...s,
       this.removerEretornarProximaCarta(),

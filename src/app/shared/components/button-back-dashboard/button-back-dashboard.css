@@ -1,0 +1,15 @@
+.btn-back-dash{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #3963f7;
+    border: none;
+    background-color: transparent;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.btn-back-dash:hover{
+  transform: scale(1.05);
+
+}

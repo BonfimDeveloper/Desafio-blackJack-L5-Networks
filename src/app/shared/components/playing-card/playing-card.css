@@ -1,14 +1,13 @@
 .card {
   background: #fff;
   border-radius: 4px;
-  border: 2px solid rgba(0,0,0,0.8);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   margin-right: -30px;
-
 }
 
 .card.small {
@@ -27,7 +26,7 @@
   font-weight: 700;
   line-height: 1;
   margin-top: 6px;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .suit {
@@ -35,7 +34,6 @@
   font-size: 16px;
   display: flex;
   margin-left: 10px;
-
 }
 
 /* CORES DOS NAIPES */
@@ -47,52 +45,17 @@
   color: #111;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .card {
   background: #fff;
   border-radius: 4px;
-  border: 2px solid rgba(0,0,0,0.8);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   margin-right: -30px;
 
-  /* necessário para permitir overlay */
   position: relative;
   overflow: hidden;
 
@@ -100,11 +63,11 @@
   height: 106px;
 }
 
-/* frente da carta */
+
 .card-front,
 .card-back {
   position: absolute;
-  inset: 0; /* cobre toda a carta */
+  inset: 0;
   width: 100%;
   height: 100%;
 

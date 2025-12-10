@@ -12,6 +12,6 @@ export class ButtonBackDashboard {
   constructor(private router: Router) {}
 
   voltar() {
-    this.router.navigate(['/dashboard']); // ajuste sua rota se for diferente
+    this.router.navigate(['/dashboard']);
   }
 }

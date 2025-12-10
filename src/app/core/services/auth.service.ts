@@ -1,8 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { StorageService } from './storage.service';
 /*
-O UUID (Universally Unique Identifier)
-serve para gerar identificadores únicos,
+UUID  para gerar identificadores únicos,
 ou seja, códigos que nunca se repetem,
 mesmo que gerados em sistemas diferentes.
 */

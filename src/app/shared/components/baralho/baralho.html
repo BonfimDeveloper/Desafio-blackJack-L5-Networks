@@ -1,89 +1,91 @@
 <div class="deck-container" [style.width.px]="cardWidth" [style.height.px]="cardHeight">
-<!-- Stack of cards (visual) -->
-<div class="deck-stack" (click)="clickable ? draw(false) : null" [class.disabled]="!clickable">
-<ng-container *ngFor="let n of visualStack; let i = index">
-<div
-class="card back"
-[style.transform]="computeStackTransform(i)"
-[style.zIndex]="100 - i"
-[attr.aria-hidden]="true"
->
-
-<!-- <svg [attr.width]="cardWidth" [attr.height]="cardHeight" viewBox="0 0 88 106" preserveAspectRatio="xMidYMid meet">
-<rect x="0" y="0" width="88" height="106" rx="6" ry="6" fill="#0b4b76" stroke="#06354f" stroke-width="0.8" />
-<g transform="translate(44,53)" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">
-<circle r="20" fill="#ffffff22"></circle>
-<text y="6" font-size="20" fill="#ffffff">L5</text>
-</g>
-</svg> -->
-
-
- <div class="card-back" >
-    <svg width="56" height="65" viewBox="0 0 56 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g filter="url(#filter0_d_0_1)">
-        <path d="M2.00004 40.6V3.33786e-06H11.396V32.944H31.754V40.6H2.00004Z" fill="white" />
-      </g>
-      <g filter="url(#filter1_d_0_1)">
-        <path
-          d="M36.5069 60.296C33.6843 60.296 30.8809 59.9287 28.0969 59.194C25.3516 58.4207 22.9929 57.338 21.0209 55.946L24.7329 48.754C26.2796 49.8753 28.0583 50.7647 30.0689 51.422C32.1183 52.0793 34.1869 52.408 36.2749 52.408C38.6336 52.408 40.4896 51.944 41.8429 51.016C43.1963 50.088 43.8729 48.7927 43.8729 47.13C43.8729 46.086 43.6023 45.158 43.0609 44.346C42.5196 43.534 41.5529 42.9153 40.1609 42.49C38.8076 42.0647 36.8936 41.852 34.4189 41.852H24.0369L26.1249 19H50.8909V26.54H29.4889L34.3609 22.248L32.9109 38.546L28.0389 34.254H36.6229C40.6443 34.254 43.8729 34.8147 46.3089 35.936C48.7836 37.0187 50.5816 38.5073 51.7029 40.402C52.8243 42.2967 53.3849 44.4427 53.3849 46.84C53.3849 49.2373 52.7856 51.4607 51.5869 53.51C50.3883 55.5207 48.5323 57.164 46.0189 58.44C43.5443 59.6773 40.3736 60.296 36.5069 60.296Z"
-          fill="white"
-        />
-      </g>
-      <defs>
-        <filter
-          id="filter0_d_0_1"
-          x="0"
-          y="0"
-          width="33.7539"
-          height="44.6"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha"
-          />
-          <feOffset dy="2" />
-          <feGaussianBlur stdDeviation="1" />
-          <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0" />
-          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
-          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape" />
-        </filter>
-        <filter
-          id="filter1_d_0_1"
-          x="19.021"
-          y="19"
-          width="36.3638"
-          height="45.296"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha"
-          />
-          <feOffset dy="2" />
-          <feGaussianBlur stdDeviation="1" />
-          <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0" />
-          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
-          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape" />
-        </filter>
-      </defs>
-    </svg>
+  <div class="deck-stack" (click)="clickable ? draw(false) : null" [class.disabled]="!clickable">
+    <ng-container *ngFor="let n of visualStack; let i = index">
+      <div
+        class="card back"
+        [style.transform]="computeStackTransform(i)"
+        [style.zIndex]="100 - i"
+        [attr.aria-hidden]="true"
+      >
+        <div class="card-back">
+          <svg
+            width="56"
+            height="65"
+            viewBox="0 0 56 65"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g filter="url(#filter0_d_0_1)">
+              <path d="M2.00004 40.6V3.33786e-06H11.396V32.944H31.754V40.6H2.00004Z" fill="white" />
+            </g>
+            <g filter="url(#filter1_d_0_1)">
+              <path
+                d="M36.5069 60.296C33.6843 60.296 30.8809 59.9287 28.0969 59.194C25.3516 58.4207 22.9929 57.338 21.0209 55.946L24.7329 48.754C26.2796 49.8753 28.0583 50.7647 30.0689 51.422C32.1183 52.0793 34.1869 52.408 36.2749 52.408C38.6336 52.408 40.4896 51.944 41.8429 51.016C43.1963 50.088 43.8729 48.7927 43.8729 47.13C43.8729 46.086 43.6023 45.158 43.0609 44.346C42.5196 43.534 41.5529 42.9153 40.1609 42.49C38.8076 42.0647 36.8936 41.852 34.4189 41.852H24.0369L26.1249 19H50.8909V26.54H29.4889L34.3609 22.248L32.9109 38.546L28.0389 34.254H36.6229C40.6443 34.254 43.8729 34.8147 46.3089 35.936C48.7836 37.0187 50.5816 38.5073 51.7029 40.402C52.8243 42.2967 53.3849 44.4427 53.3849 46.84C53.3849 49.2373 52.7856 51.4607 51.5869 53.51C50.3883 55.5207 48.5323 57.164 46.0189 58.44C43.5443 59.6773 40.3736 60.296 36.5069 60.296Z"
+                fill="white"
+              />
+            </g>
+            <defs>
+              <filter
+                id="filter0_d_0_1"
+                x="0"
+                y="0"
+                width="33.7539"
+                height="44.6"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+                />
+                <feOffset dy="2" />
+                <feGaussianBlur stdDeviation="1" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0" />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_0_1"
+                  result="shape"
+                />
+              </filter>
+              <filter
+                id="filter1_d_0_1"
+                x="19.021"
+                y="19"
+                width="36.3638"
+                height="45.296"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+                />
+                <feOffset dy="2" />
+                <feGaussianBlur stdDeviation="1" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0" />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_0_1"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </ng-container>
   </div>
-</div>
-</ng-container>
-</div>
-
-
-<!-- Contador de cartas-->
-<div class="deck-count">{{ cards.length }}</div>
+  <div class="deck-count">{{ cards.length }}</div>
 </div>

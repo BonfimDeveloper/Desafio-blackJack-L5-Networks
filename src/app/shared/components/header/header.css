@@ -1,6 +1,8 @@
-
-.div-header{
-  width: 100%; display: flex; justify-content: center; background-color: transparent
+.div-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
 }
 .header {
   width: 1320px;
@@ -8,10 +10,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-/* Ícones e nome do app */
 .header-in {
   display: flex;
   flex-direction: row;
@@ -20,21 +20,16 @@
   font-size: 22px;
 }
 
-/* Informação do usuário */
 .header-user {
   font-size: 14px;
 }
-.btn-logout{
-background-color: transparent;
-border: none;
-cursor: pointer;
-
+.btn-logout {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-
-/*=====================================================================
-  TABLET (mínimo 601px e máximo 1024px)
-=====================================================================*/
+/*  TABLET (mínimo 601px e máximo 1024px) */
 
 @media (min-width: 601px) and (max-width: 1024px) {
   .header {
@@ -47,19 +42,14 @@ cursor: pointer;
     gap: 20px;
     font-size: 28px;
   }
-  .btn-logout{
-background-color: transparent;
-border: none;
-cursor: pointer;
-
+  .btn-logout {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 }
-}
 
-
-
-/*=====================================================================
-  DESKTOP (a partir de 1025px)
-=====================================================================*/
+/*   DESKTOP (a partir de 1025px) */
 @media (min-width: 1025px) {
   .header {
     display: flex;
@@ -78,16 +68,15 @@ cursor: pointer;
     font-size: 36px;
   }
 
- .btn-logout{
-background-color: transparent;
-border: none;
-cursor: pointer;
-}
+  .btn-logout {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 
-.icon {
-  font-size: 50px;
-  width: 60px;
-  height: 48px;
-}
-
+  .icon {
+    font-size: 50px;
+    width: 60px;
+    height: 48px;
+  }
 }
