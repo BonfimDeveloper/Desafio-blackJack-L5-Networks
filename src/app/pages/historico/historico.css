@@ -118,3 +118,35 @@ td app-card {
 }
 
 
+/*PAGINAÇÂO*/
+
+.paginator-controls{
+  display: flex; justify-content: center; align-items: center;
+  margin-top: 60px;
+}
+
+.btn-nav{
+  border: none;
+  background-color: transparent;
+  color: #3963F7;
+  font-size: 18px;
+  cursor: pointer;
+}
+.btn-nav:hover{
+  text-decoration: underline;
+}
+
+.btn-page-number{
+border: none;
+  background-color: transparent;
+  color: #3963F7;
+  font-size: 18px;
+  cursor: pointer;
+}
+.btn-page-number:hover{
+  text-decoration: underline;
+}
+
+.page-info{
+  color: #6d6b6b;
+}
