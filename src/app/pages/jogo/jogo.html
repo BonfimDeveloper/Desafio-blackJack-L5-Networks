@@ -1,4 +1,3 @@
-<!--  -->
 <div
   style="
     width: 100%;
@@ -57,7 +56,6 @@
     <!-- BOTÕES -->
     <div class="controls">
       <button class="btn pass" (click)="onPass()" [disabled]="jogoEncerrado || !jogadorPodePedir">
-        <!-- <span class="material-symbols-outlined"> back_hand </span> -->
 
         <svg
           width="34"
@@ -80,7 +78,6 @@
         class="btn draw"
         [disabled]="jogoEncerrado || !jogadorPodePedir ||  !vezDoJogador"
       >
-        <!-- <span class="material-symbols-outlined"> arrow_downward </span> -->
         <svg
           width="32"
           height="43"
@@ -115,7 +112,6 @@
       "
     >
       <app-button-back-dashboard></app-button-back-dashboard>
-      <!-- <button (click)="resetJogo()" class="btn-reset">RESET</button> -->
     </div>
     <app-vitoria
       *ngIf="jogoEncerrado && resultadoFinal === 'VITÓRIA'"

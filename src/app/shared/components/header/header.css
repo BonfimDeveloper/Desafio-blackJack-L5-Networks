@@ -1,6 +1,10 @@
+
+.div-header{
+  width: 100%; display: flex; justify-content: center; background-color: transparent
+}
 .header {
   width: 1320px;
-  height: 77px;
+  min-height: 77px;
   display: flex;
   flex-direction: column;
   align-items: center;
