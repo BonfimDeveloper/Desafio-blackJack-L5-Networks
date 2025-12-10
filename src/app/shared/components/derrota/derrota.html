@@ -1,0 +1,8 @@
+<div class="explosion-container" [class.active]="animar">
+  <div class="message-box">
+    <h1>DERROTA!</h1>
+    <p>Você perdeu com {{ pontuacaoFinal }} pontos.</p>
+    <button class="btn-reset-overlay" (click)="onReset()">JOGAR NOVAMENTE</button>
+  </div>
+  <div class="blast-ring"></div>
+</div>

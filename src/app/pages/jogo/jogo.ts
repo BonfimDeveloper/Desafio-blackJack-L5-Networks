@@ -13,6 +13,8 @@ import { LoaderService } from '../../core/services/loader.service';
 import { ToastService } from '../../core/services/toast.service';
 import { StorageService } from '../../core/services/storage.service';
 import { ButtonBackDashboard } from '../../shared/components/button-back-dashboard/button-back-dashboard';
+import { Vitoria } from '../../shared/components/vitoria/vitoria';
+import { Derrota } from '../../shared/components/derrota/derrota';
 
 @Component({
   selector: 'app-jogo',
@@ -27,6 +29,8 @@ import { ButtonBackDashboard } from '../../shared/components/button-back-dashboa
     MatDialogModule,
     MatSnackBarModule,
     ButtonBackDashboard,
+    Vitoria,
+    Derrota,
   ],
   templateUrl: './jogo.html',
   styleUrl: './jogo.css',
@@ -41,8 +45,9 @@ export class Jogo {
   cartasJogador: Card[] = [];
   vezDoJogador = true;
   mostraCartaDealerFimJogo: Boolean = false;
-
   jogoEncerrado: boolean = false;
+
+  resultadoFinal: 'VITÓRIA' | 'DERROTA' | 'EMPATE' | null = null;
 
   constructor(
     private dialog: MatDialog,
@@ -91,6 +96,8 @@ export class Jogo {
 
     // reseta vez do jogador
     this.vezDoJogador = true;
+
+    this.resultadoFinal = null; // LIMPAR o resultado ao resetar
 
     // inicia nova rodada
     setTimeout(() => {
@@ -222,6 +229,7 @@ export class Jogo {
 
     // Usa a função decidirResultado para obter VITÓRIA ou DERROTA (o EMPATE é tratado como DERROTA na sua implementação)
     const resultado = this.decidirResultado();
+    this.resultadoFinal = resultado;
 
     if (resultado === 'VITÓRIA') {
       this.toast.success(`🎉 Vitória! Você alcançou ${totalJog} pontos.`);

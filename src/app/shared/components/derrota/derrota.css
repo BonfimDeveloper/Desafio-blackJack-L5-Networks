@@ -1,0 +1,74 @@
+.explosion-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.explosion-container.active {
+    opacity: 1;
+}
+
+.message-box {
+    text-align: center;
+    color: white;
+    transform: scale(0.5); /* Começa pequeno */
+    transition: transform 0.3s ease-out;
+    z-index: 10;
+}
+
+.explosion-container.active .message-box {
+    transform: scale(1); /* Cresce rapidamente */
+}
+
+.message-box h1 {
+    font-size: 5em;
+    color: #ff4d4d; /* Vermelho forte */
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+/* O "Anel de Explosão" que aparece e some */
+.blast-ring {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 100, 100, 0.5) 0%, rgba(255, 0, 0, 0) 70%);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva suave */
+}
+
+.explosion-container.active .blast-ring {
+    width: 800px; /* Expande */
+    height: 800px;
+    opacity: 0; /* Desaparece rapidamente */
+}
+
+/* Estilo para o botão de reset na tela de resultado */
+.btn-reset-overlay {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: #333; /* Cor escura para contrastar */
+    color: white;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn-reset-overlay:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}

@@ -75,7 +75,11 @@
         <span>PASSAR</span>
       </button>
 
-      <button (click)="pedirCarta()" class="btn draw" [disabled]="jogoEncerrado || !jogadorPodePedir">
+      <button
+        (click)="pedirCarta()"
+        class="btn draw"
+        [disabled]="jogoEncerrado || !jogadorPodePedir ||  !vezDoJogador"
+      >
         <!-- <span class="material-symbols-outlined"> arrow_downward </span> -->
         <svg
           width="32"
@@ -111,7 +115,27 @@
       "
     >
       <app-button-back-dashboard></app-button-back-dashboard>
-      <button (click)="resetJogo()" class="btn-reset">RESET</button>
+      <!-- <button (click)="resetJogo()" class="btn-reset">RESET</button> -->
     </div>
+    <app-vitoria
+      *ngIf="jogoEncerrado && resultadoFinal === 'VITÓRIA'"
+      [pontuacaoFinal]="getPontuacao(maoJogador)"
+      (jogarNovamente)="resetJogo()"
+    >
+    </app-vitoria>
+
+    <app-derrota
+      *ngIf="jogoEncerrado && (resultadoFinal === 'DERROTA' || resultadoFinal === 'EMPATE')"
+      [pontuacaoFinal]="getPontuacao(maoJogador)"
+      (jogarNovamente)="resetJogo()"
+    >
+    </app-derrota>
   </div>
+
+
 </div>
+
+
+
+
+

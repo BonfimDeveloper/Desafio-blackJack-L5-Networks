@@ -1,0 +1,12 @@
+<div class="confetti-container">
+  <div *ngFor="let piece of confettiPieces"
+       class="confetti-piece"
+       [ngStyle]="getRandomStyle()">
+  </div>
+
+  <div class="message-box">
+    <h1>🎉 VITÓRIA! 🎉</h1>
+    <p>Parabéns, você venceu com {{ pontuacaoFinal }} pontos!</p>
+    <button class="btn-reset-overlay" (click)="onReset()">JOGAR NOVAMENTE</button>
+  </div>
+</div>
