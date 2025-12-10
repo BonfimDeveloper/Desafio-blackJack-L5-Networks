@@ -1,31 +1,36 @@
+
+/* 1. ESTILOS BASE (MOBILE FIRST - ATÉ 600px) */
+
+
 :host {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 5px;
   width: 100%;
 }
 
 .div-tabela {
-  width: 1320px;
-  height: 777px;
+  width: 100%;
+  max-width: 1320px;
+  height: auto;
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
-
 }
 
 .tabela {
-  width: 1320px;
+  width: 100%;
   background-color: white;
-  border-collapse: separate;
-  border-spacing: 0 12px; /* Espaço entre as linhas */
+  border-collapse: collapse;
+  border-spacing: 0;
   font-family: 'Inter', sans-serif;
 }
 
-.tabela thead tr {
-  background: transparent;
+.tabela thead,
+.tabela .divider-row {
+  display: none;
 }
 
 .tabela th {
@@ -36,117 +41,264 @@
   color: #444;
 }
 
-.tabela tbody tr {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 .tabela tbody td {
-  padding: 12px 12px;
-  vertical-align: middle;
+  /* Células como blocos */
+  display: block;
+  width: auto;
+  padding: 8px 10px;
   color: #333;
+  text-align: right;
+  border: none;
+  border-bottom: 1px dashed #eee;
+  position: relative;
+  padding-top: 25px;
 }
 
-/* Colunas com cartas */
-.tabela tbody td app-card {
-  margin-right: 4px;
+.tabela tbody td:before {
+  content: attr(data-label);
+  position: absolute;
+  /* Move para o topo da célula */
+  top: 5px;
+  left: 10px;
+  font-weight: 700;
+  color: #444;
+  text-align: left;
+  width: 90%;
+  font-size: 14px;
 }
-
-/* Resultado */
-.tabela tbody td:nth-child(3) {
+/* Adiciona o label da coluna para o mobile */
+.tabela tbody td:before {
+  content: attr(data-label);
+  position: absolute;
+  left: 10px;
   font-weight: 600;
-  text-transform: uppercase;
-}
-
-/* Vitória / Derrota cores opcionais */
-.tabela tbody td:nth-child(3).vitoria {
-  color: #1a7f1a;
-}
-
-.tabela tbody td:nth-child(3).derrota {
-  color: #c62828;
-}
-
-.tabela tbody td:nth-child(3).empate {
   color: #555;
 }
 
-/* Ajuste para cards em linha */
-td app-card {
-  display: inline-block;
+.tabela tbody tr td:last-child {
+  border-bottom: none;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
-  .tabela th,
-  .tabela td {
-    font-size: 13px;
-    padding: 6px;
-  }
-
-  td app-card {
-    transform: scale(0.8);
-  }
+/* Alinha o conteúdo (cartas) à direita no mobile */
+.tabela tbody td div {
+  justify-content: flex-end;
 }
 
+/* Customização de cartas (Mobile) */
 :host ::ng-deep app-playing-card.carta-mini {
-  width: 45.66px !important;
-  height: 55px !important;
+  width: 35px !important;
+  height: 45px !important;
   display: inline-block !important;
 }
 
 :host ::ng-deep app-playing-card.carta-mini .card {
-  width: 45.66px !important;
-  height: 55px !important;
+  width: 35px !important;
+  height: 45px !important;
 }
 
 :host ::ng-deep app-playing-card.carta-mini .rank {
-  font-size: 20px;
+  font-size: 16px;
 }
 
-
-.divider-row td {
-  height: 2px;
-  background-color: #999999;
-  padding: 0;
+/* Paginação (Mobile) */
+.paginator-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-
-.tabela tbody td {
-  border-bottom: 2px solid #999999;
-}
-
-
-/*PAGINAÇÂO*/
-
-.paginator-controls{
-  display: flex; justify-content: center; align-items: center;
-  margin-top: 60px;
-}
-
-.btn-nav{
+.btn-nav {
   border: none;
   background-color: transparent;
-  color: #3963F7;
-  font-size: 18px;
+  color: #3963f7;
+  font-size: 14px;
   cursor: pointer;
 }
-.btn-nav:hover{
+.btn-nav:hover {
   text-decoration: underline;
 }
 
-.btn-page-number{
-border: none;
+.btn-page-number {
+  border: none;
   background-color: transparent;
-  color: #3963F7;
-  font-size: 18px;
+  color: #3963f7;
+  font-size: 14px;
   cursor: pointer;
 }
-.btn-page-number:hover{
+.btn-page-number:hover {
   text-decoration: underline;
 }
 
-.page-info{
+.page-info {
   color: #6d6b6b;
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+/* 2. TABLET (601px a 1023px) */
+
+@media screen and (min-width: 601px) and (max-width: 1023px) {
+  .div-tabela {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .tabela {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+  }
+
+  /* Mostra o cabeçalho em Tablet */
+  .tabela thead,
+  .tabela .divider-row {
+    display: table-header-group;
+  }
+
+  /* Volta as linhas e células ao display de tabela */
+  .tabela tbody tr {
+    display: table-row;
+    border: none;
+    margin-bottom: 0;
+  }
+
+  .tabela tbody td {
+    display: table-cell;
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid #999999;
+    /* Remove o label do mobile */
+    text-align: left;
+  }
+  .tabela tbody td:before {
+    content: none;
+  }
+
+  /* Ajustes para células com cartas */
+  .tabela tbody td div {
+    justify-content: flex-start;
+  }
+
+  /* Reduz o tamanho das cartas no tablet */
+  :host ::ng-deep app-playing-card.carta-mini {
+    width: 40px !important;
+    height: 50px !important;
+  }
+  :host ::ng-deep app-playing-card.carta-mini .card {
+    width: 40px !important;
+    height: 50px !important;
+  }
+  :host ::ng-deep app-playing-card.carta-mini .rank {
+    font-size: 18px;
+  }
+
+  .paginator-controls {
+    margin-top: 40px;
+    gap: 10px;
+  }
+
+  .btn-nav,
+  .btn-page-number {
+    font-size: 16px;
+  }
+
+  .page-info {
+    font-size: 14px;
+    width: auto;
+  }
+}
+
+/* 3. DESKTOP (A PARTIR DE 1024px)  */
+
+@media (min-width: 1024px) {
+  .div-tabela {
+    width: 1320px;
+    height: 777px;
+    padding: 20px;
+  }
+
+  .tabela {
+    width: 1320px;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+  }
+
+  .tabela thead,
+  .tabela .divider-row {
+    display: table-header-group;
+  }
+
+  .tabela tbody tr {
+    display: table-row;
+
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .tabela th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .tabela tbody td {
+    display: table-cell;
+    padding: 12px 12px;
+    vertical-align: middle;
+    color: #333;
+    text-align: center;
+    border-bottom: 2px solid #999999;
+  }
+
+  /* Remove o elemento que cria o label em mobile */
+  .tabela tbody td:before {
+    content: none;
+  }
+
+  /* Ajuste para cartas em linha  */
+  .tabela tbody td div {
+    justify-content: flex-start;
+  }
+
+  /* Customização de cartas  */
+  :host ::ng-deep app-playing-card.carta-mini {
+    width: 46px !important;
+    height: 55.41px !important;
+    display: inline-block !important;
+  }
+
+  :host ::ng-deep app-playing-card.carta-mini .card {
+    width: 46px !important;
+    height: 55.41px !important;
+  }
+
+  :host ::ng-deep app-playing-card.carta-mini .rank {
+    font-size: 20px;
+  }
+
+  .paginator-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    flex-wrap: nowrap;
+  }
+
+  .btn-nav {
+    font-size: 18px;
+  }
+  .btn-page-number {
+    font-size: 18px;
+  }
+  .page-info {
+    font-size: 14px;
+    width: auto;
+  }
 }

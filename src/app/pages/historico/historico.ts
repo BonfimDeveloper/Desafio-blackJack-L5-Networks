@@ -41,9 +41,8 @@ export class Historico implements OnInit {
     this.paginatedPartidas = this.partidas.slice(startIndex, endIndex);
   }
 
-  /**
-   * Navega para um número de página específico.
-   */
+  // Navega para um número de página específico.
+
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -51,9 +50,8 @@ export class Historico implements OnInit {
     }
   }
 
-  /**
-   * Navega para a próxima página.
-   */
+  // Navega para a próxima página.
+
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -61,9 +59,8 @@ export class Historico implements OnInit {
     }
   }
 
-  /**
-   * Navega para a página anterior.
-   */
+  // Navega para a página anterior.
+
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;

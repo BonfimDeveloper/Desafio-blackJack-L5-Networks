@@ -51,7 +51,6 @@ export class Dashboard {
       this.router.navigate(['/history']);
       this.loader.hide();
     }, 1000);
-    console.log('funcionou view');
   }
 
   //Navega para a página do jogo

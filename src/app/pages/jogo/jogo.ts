@@ -66,13 +66,10 @@ export class Jogo {
       disableClose: true,
     });
 
-    // 👉 escutando fechamento
     this.modalRef.afterClosed().subscribe(() => {
-      // 💡 CORREÇÃO: Empurra a distribuição para o próximo ciclo de eventos
       setTimeout(() => {
         this.distribuirCartasIniciais();
-        console.log('Modal foi fechado');
-      }, 0); // O timeout de 0ms adia a execução para o próximo tick do evento loop
+      }, 0);
     });
   }
 
@@ -86,7 +83,7 @@ export class Jogo {
     // 1. Resetar o componente Baralho
     if (this.baralho && this.baralho.reset) {
       // Verifica se a referência e o método existem
-      this.baralho.reset(); // 💡 CHAMA O MÉTODO DE RESET DO BARALHO
+      this.baralho.reset(); //
     }
     // limpa estados
     this.jogoEncerrado = false;
@@ -100,7 +97,8 @@ export class Jogo {
     // reseta vez do jogador
     this.vezDoJogador = true;
 
-    this.resultadoFinal = null; // LIMPAR o resultado ao resetar
+    // LIMPAR o resultado ao resetar
+    this.resultadoFinal = null;
 
     // inicia nova rodada
     setTimeout(() => {
@@ -123,9 +121,9 @@ export class Jogo {
 
     // DEALER → 1 carta cima, 1 carta baixo
     this.vezDoJogador = false; // força próxima carta ser do dealer
-    this.baralho.draw(true); // primeira carta do dealer (face up)
+    this.baralho.draw(true); // primeira carta do dealer  virada pra cima
 
-    this.baralho.draw(false); // segunda carta do dealer (face down)
+    this.baralho.draw(false); // segunda carta do dealer fica virada para baixo
 
     // devolve a vez pro jogador
     this.vezDoJogador = true;
@@ -218,7 +216,7 @@ export class Jogo {
     loop();
   }
   fimDeJogo(vencedor?: 'jogador' | 'dealer') {
-    if (this.jogoEncerrado) return; // já finalizado
+    if (this.jogoEncerrado) return;
 
     this.jogoEncerrado = true;
     this.revelarCartasDealer();
@@ -229,7 +227,7 @@ export class Jogo {
 
     const totalJog = this.getPontuacao(this.maoJogador);
 
-    // Usa a função decidirResultado para obter VITÓRIA ou DERROTA (o EMPATE é tratado como DERROTA na sua implementação)
+    // Usa a função decidirResultado para obter VITÓRIA ou DERROTA
     const resultado = this.decidirResultado();
     this.resultadoFinal = resultado;
 
@@ -276,7 +274,7 @@ export class Jogo {
   }
 
   registrarPartidaNoHistorico(): void {
-    const resultado = this.decidirResultado(); // VITORIA | DERROTA | EMPATE (se optar)
+    const resultado = this.decidirResultado(); // VITORIA | DERROTA
 
     const partida = {
       jogador: [...this.maoJogador],
@@ -285,7 +283,6 @@ export class Jogo {
       data: new Date().toLocaleString('pt-BR'),
     };
 
-    // evitar duplicatas simples: comparar com o último registro salvo
     const ult = this.storage.listarPartidas()[0];
     if (ult) {
       const isSame =

@@ -56,7 +56,6 @@
     <!-- BOTÕES -->
     <div class="controls">
       <button class="btn pass" (click)="onPass()" [disabled]="jogoEncerrado || !jogadorPodePedir">
-
         <svg
           width="34"
           height="36"
@@ -76,7 +75,7 @@
       <button
         (click)="pedirCarta()"
         class="btn draw"
-        [disabled]="jogoEncerrado || !jogadorPodePedir ||  !vezDoJogador"
+        [disabled]="jogoEncerrado || !jogadorPodePedir || !vezDoJogador"
       >
         <svg
           width="32"
@@ -102,15 +101,7 @@
       </button>
     </div>
 
-    <div
-      style="
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      "
-    >
+    <div class="div-btn-dash">
       <app-button-back-dashboard></app-button-back-dashboard>
     </div>
     <app-vitoria
@@ -121,17 +112,10 @@
     </app-vitoria>
 
     <app-derrota
-      *ngIf="jogoEncerrado && (resultadoFinal === 'DERROTA' )"
+      *ngIf="jogoEncerrado && resultadoFinal === 'DERROTA'"
       [pontuacaoFinal]="getPontuacao(maoJogador)"
       (jogarNovamente)="resetJogo()"
     >
     </app-derrota>
   </div>
-
-
 </div>
-
-
-
-
-
