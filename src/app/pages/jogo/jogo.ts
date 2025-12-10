@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Baralho } from '../../shared/components/baralho/baralho';
@@ -53,7 +53,8 @@ export class Jogo {
     private dialog: MatDialog,
     private loader: LoaderService,
     private toast: ToastService,
-    private storage: StorageService
+    private storage: StorageService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +88,7 @@ export class Jogo {
     }
     // limpa estados
     this.jogoEncerrado = false;
+    this.cd.detectChanges();
     this.mostraCartaDealerFimJogo = false;
     this.mensagemFinal = '';
 
@@ -96,6 +98,7 @@ export class Jogo {
 
     // reseta vez do jogador
     this.vezDoJogador = true;
+    this.cd.detectChanges();
 
     // LIMPAR o resultado ao resetar
     this.resultadoFinal = null;
@@ -114,6 +117,7 @@ export class Jogo {
     this.maoJogador = [];
     this.maoDealer = [];
     this.vezDoJogador = true;
+    this.cd.detectChanges();
 
     // JOGADOR → 2 cartas viradas pra cima
     this.baralho.draw(true);
@@ -148,6 +152,7 @@ export class Jogo {
       // estourou → perde na hora
       if (totalJog > 21) {
         this.vezDoJogador = false;
+        this.cd.detectChanges();
         this.fimDeJogo('dealer');
         return;
       }
@@ -155,6 +160,7 @@ export class Jogo {
       // se atingiu 21 → parar e chamar dealer automaticamente
       if (totalJog === 21) {
         this.vezDoJogador = false;
+        this.cd.detectChanges();
         this.fimDeJogo('jogador');
         return;
       }
@@ -162,6 +168,7 @@ export class Jogo {
       // se o jogador parar de pedir automaticamente por limite
       if (!this.jogadorPodePedir) {
         this.vezDoJogador = false;
+        this.cd.detectChanges();
         setTimeout(() => this.jogadaDealer(), 600);
         return;
       }
@@ -204,6 +211,7 @@ export class Jogo {
 
       if (deveComprar) {
         this.vezDoJogador = false;
+        this.cd.detectChanges();
         this.baralho.draw(true); // dealer sempre vira pra cima
         setTimeout(loop, 100);
         return;
@@ -218,12 +226,20 @@ export class Jogo {
   fimDeJogo(vencedor?: 'jogador' | 'dealer') {
     if (this.jogoEncerrado) return;
 
-    this.jogoEncerrado = true;
+    Promise.resolve().then(() => {
+      this.jogoEncerrado = true;
+      this.vezDoJogador = false;
+      this.cd.detectChanges();
+    });
     this.revelarCartasDealer();
 
     // Força a exibição da carta do dealer e encerra o turno do jogador
     this.mostraCartaDealerFimJogo = true;
-    this.vezDoJogador = false;
+    Promise.resolve().then(() => {
+      this.jogoEncerrado = true;
+      this.vezDoJogador = false;
+      this.cd.detectChanges();
+    });
 
     const totalJog = this.getPontuacao(this.maoJogador);
 
@@ -337,8 +353,11 @@ export class Jogo {
   }
 
   onPass() {
-    this.vezDoJogador = false;
-    setTimeout(() => this.jogadaDealer(), 600);
+    Promise.resolve().then(() => {
+      this.vezDoJogador = false;
+      this.cd.detectChanges();
+      setTimeout(() => this.jogadaDealer(), 600);
+    });
   }
 
   pedirCarta() {

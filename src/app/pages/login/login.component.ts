@@ -75,8 +75,10 @@ export class LoginComponent {
       this.auth.login(email);
       this.toast.success('Login realizado com sucesso!');
       this.router.navigate(['/dashboard']);
+      this.loader.hide();
     } catch (err: any) {
       this.toast.error(err.message || 'Erro ao fazer login');
+      this.loader.hide();
     } finally {
       this.loader.hide();
     }
@@ -86,6 +88,8 @@ export class LoginComponent {
     this.loader.show();
     if (this.cadastroForm.invalid) {
       this.cadastroForm.markAllAsTouched();
+      this.loader.hide();
+
       return;
     }
 
@@ -94,7 +98,6 @@ export class LoginComponent {
 
     try {
       this.auth.register(email, nome);
-      console.log('Usuário cadastrado com sucesso!');
       this.toast.success('Usuário cadastrado!');
       setTimeout(() => {
         this.acessar = true;
@@ -105,28 +108,21 @@ export class LoginComponent {
     } catch (err: any) {
       console.error(err.message);
       this.loader.hide();
-
-      // exibir erro no template
     }
   }
 
   onClickAcessar() {
     this.acessar = true;
-
-    console.log(this.acessar);
   }
 
   onClickVoltar() {
     this.acessar = false;
     this.cadastrar = false;
-
-    console.log(this.acessar);
   }
 
   onClickCadastrar() {
     this.acessar = false;
     this.cadastrar = true;
-    console.log(this.cadastrar);
   }
 
   navegarParaDashboard() {

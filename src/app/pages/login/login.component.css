@@ -1,5 +1,4 @@
-/*
-
+/* ESTILOS DE DESKTOP (PADRÃO: MIN-WIDTH > 768px)   */
 
 .container {
   display: flex;
@@ -10,7 +9,7 @@
 }
 
 .header {
-  font: Poppins;
+  font-family: Poppins, sans-serif;
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -55,12 +54,9 @@
   background-color: #2f5af8;
 }
 
-
-
 .btn-cadastrar {
-  font-size: 14px;
+  font-size: 18px;
   flex-direction: row;
-font-size: 18px;
   margin-left: 250px;
   margin-top: 10px;
   border: none;
@@ -73,12 +69,10 @@ font-size: 18px;
   cursor: pointer;
   color: #2f5af8;
   transform: scale(1.1);
-
 }
 
 .login {
   width: 540px;
-
   margin: 100px auto;
   display: flex;
   flex-direction: column;
@@ -86,7 +80,7 @@ font-size: 18px;
   text-align: center;
 }
 
-.divi-form{
+.divi-form {
   width: 540px;
 }
 
@@ -113,8 +107,8 @@ font-size: 18px;
   cursor: pointer;
 }
 
-.btn-salvar{
-display: flex;
+.btn-salvar {
+  display: flex;
   width: 296px;
   height: 70px;
   font-size: 16px;
@@ -128,11 +122,9 @@ display: flex;
   cursor: pointer;
 }
 
-.btn-salvar:hover{
+.btn-salvar:hover {
   background-color: #2f5af8;
 }
-
-
 
 .btn-jogar:hover {
   background-color: #2f5af8;
@@ -141,7 +133,6 @@ display: flex;
 .btn-voltar {
   font-size: 14px;
   flex-direction: row;
-
   border: none;
   color: #3963f7;
   cursor: pointer;
@@ -152,264 +143,101 @@ display: flex;
   transform: scale(1.1);
 }
 
-
- */
-
-
- /* ================================================= */
-/* ESTILOS DE DESKTOP (PADRÃO: MIN-WIDTH > 768px)   */
-/* ================================================= */
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 40px;
-}
-
-.header {
-    /* Propriedade 'font' não é padrão, substituída por family/size/weight */
-    font-family: Poppins, sans-serif;
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    font-size: 36px;
-    gap: 8px;
-    margin-bottom: 30px;
-    margin-top: 174px; /* Margem grande para desktop */
-}
-
-.icon {
-    font-size: 50px;
-    width: 60px;
-    height: 48px;
-}
-
-.card {
-    width: 620px; /* Largura fixa no desktop */
-    height: 480px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
-    border: 1px;
-    border-radius: 10px;
-    padding: 30px;
-    background-color: white;
-}
-
-.btn-acessar {
-    width: 344px;
-    height: 100px;
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
-    background-color: #3963f7;
-    color: white;
-    cursor: pointer;
-}
-
-.btn-acessar:hover {
-    background-color: #2f5af8;
-}
-
-.btn-cadastrar {
-    font-size: 18px; /* Ajustado de 14px para 18px conforme seu código original*/
-    flex-direction: row;
-    margin-left: 250px;
-    margin-top: 10px;
-    border: none;
-    color: #3963f7;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.btn-cadastrar:hover {
-    cursor: pointer;
-    color: #2f5af8;
-    transform: scale(1.1);
-}
-
-.login {
-    width: 540px; /* Largura fixa no desktop */
-    margin: 100px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-}
-
-.divi-form{
-    width: 540px;
-}
-
-.btns {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-}
-
-.btn-jogar {
-    display: flex;
-    width: 149px;
-    height: 40px;
-    font-size: 14px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 6px;
-    border: none;
-    background-color: #3963f7;
-    color: white;
-    cursor: pointer;
-}
-
-.btn-salvar{
-    display: flex;
-    width: 296px;
-    height: 70px;
-    font-size: 16px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    border: none;
-    background-color: #3963f7;
-    color: white;
-    cursor: pointer;
-}
-
-.btn-salvar:hover{
-    background-color: #2f5af8;
-}
-
-.btn-jogar:hover {
-    background-color: #2f5af8;
-}
-
-.btn-voltar {
-    font-size: 14px;
-    flex-direction: row;
-    border: none;
-    color: #3963f7;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.btn-voltar:hover {
-    transform: scale(1.1);
-}
-
-
-/* ================================================= */
-/* MEDIA QUERY: TABLET (Max-width: 768px)            */
-/* ================================================= */
+/* MEDIA QUERY: TABLET (Max-width: 768px)  */
 
 @media screen and (max-width: 768px) {
+  .container {
+    padding-top: 20px;
+  }
 
-    .container {
-        padding-top: 20px;
-    }
+  .header {
+    margin-top: 80px;
+    font-size: 30px;
+  }
 
-    .header {
-        margin-top: 80px; /* Reduz margem superior */
-        font-size: 30px;
-    }
+  .card {
+    width: 90%;
+    max-width: 620px;
+    padding: 20px;
+    height: auto;
+  }
 
-    .card {
-        width: 90%; /* Ocupa 90% da largura da tela */
-        max-width: 620px;
-        padding: 20px;
-        height: auto; /* Altura flexível */
-    }
+  .login {
+    width: 100%;
+    margin: 50px auto;
+  }
 
-    .login {
-        width: 100%;
-        margin: 50px auto;
-    }
+  .divi-form {
+    width: 100%;
+  }
 
-    .divi-form {
-        width: 100%;
-    }
+  .btn-acessar {
+    width: 100%;
+    height: 80px;
+    font-size: 16px;
+  }
 
-    .btn-acessar {
-        width: 100%; /* Ocupa a largura total do .login */
-        height: 80px;
-        font-size: 16px;
-    }
+  .btn-cadastrar {
+    margin-left: 0;
+    text-align: right;
+    font-size: 16px;
+  }
 
-    .btn-cadastrar {
-        margin-left: 0; /* Remove margem fixa */
-        text-align: right;
-        font-size: 16px;
-    }
+  .btns {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
 
-    .btns {
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
-    }
+  .btn-salvar {
+    width: 80%;
+    max-width: 296px;
+  }
 
-    .btn-salvar {
-        width: 80%;
-        max-width: 296px;
-    }
-
-    .btn-jogar {
-        width: 40%; /* Ajuste para que caiba ao lado de outro botão pequeno */
-        max-width: 149px;
-    }
+  .btn-jogar {
+    width: 40%;
+    max-width: 149px;
+  }
 }
 
-
-/* ================================================= */
-/* MEDIA QUERY: CELULAR (Max-width: 576px)           */
-/* ================================================= */
+/* MEDIA QUERY: CELULAR (Max-width: 576px)  */
 
 @media screen and (max-width: 576px) {
+  .header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
 
-    .header {
-        font-size: 24px; /* Reduz o tamanho da fonte */
-        margin-bottom: 20px;
-        margin-top: 40px;
-    }
+  .icon {
+    font-size: 40px;
+  }
 
-    .icon {
-        font-size: 40px;
-    }
+  .card {
+    width: 95%;
+    padding: 15px;
+  }
 
-    .card {
-        width: 95%;
-        padding: 15px;
-    }
+  .btn-acessar,
+  .btn-salvar,
+  .btn-jogar {
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    margin-top: 5px;
+  }
 
-    /* Faz todos os botões de ação ocuparem a largura total */
-    .btn-acessar,
-    .btn-salvar,
-    .btn-jogar {
-        width: 100%;
-        height: 60px;
-        font-size: 16px;
-        margin-top: 5px;
-    }
+  .btns {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
 
-    /* O container de botões passa para coluna */
-    .btns {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    /* Botão Cadastrar/Voltar (agora alinhado ao centro) */
-    .btn-cadastrar,
-    .btn-voltar {
-        width: 100%;
-        text-align: center;
-        margin-top: 15px;
-        font-size: 16px;
-    }
+  .btn-cadastrar,
+  .btn-voltar {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+  }
 }
